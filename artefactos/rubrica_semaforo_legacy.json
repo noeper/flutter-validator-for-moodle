@@ -1,0 +1,74 @@
+{
+  "practica": "Semaforo",
+  "puntuacion_maxima": 10,
+  "condiciones_excluyentes": [
+    {
+      "id": "stateful_prohibido",
+      "descripcion": "No se permite utilizar StatefulWidget",
+      "deteccion": "herencia_stateful_widget",
+      "nota_final": 0
+    }
+  ],
+  "criterios": [
+    {
+      "id": "estructura",
+      "descripcion": "Utiliza StatelessWidget, Scaffold y MaterialApp",
+      "puntos": 1,
+      "componentes": [
+        "StatelessWidget",
+        "Scaffold",
+        "MaterialApp"
+      ]
+    },
+    {
+      "id": "centrado",
+      "descripcion": "Semaforo centrado horizontal y verticalmente",
+      "puntos": 1,
+      "subcriterios": [
+        {
+          "id": "horizontal",
+          "puntos": 0.5
+        },
+        {
+          "id": "vertical",
+          "puntos": 0.5
+        }
+      ]
+    },
+    {
+      "id": "carcasa",
+      "descripcion": "Carcasa negra con esquinas redondeadas",
+      "puntos": 2,
+      "subcriterios": [
+        {
+          "id": "color_negro",
+          "puntos": 1
+        },
+        {
+          "id": "esquinas_redondeadas",
+          "puntos": 1
+        }
+      ]
+    },
+    {
+      "id": "luces",
+      "descripcion": "Tres luces circulares",
+      "puntos": 2
+    },
+    {
+      "id": "separacion",
+      "descripcion": "Separacion vertical entre las luces",
+      "puntos": 1
+    },
+    {
+      "id": "margen_interior",
+      "descripcion": "Margen interior entre luces y carcasa",
+      "puntos": 1
+    },
+    {
+      "id": "ajuste_contenido",
+      "descripcion": "Carcasa ajustada al contenido sin ocupar toda la altura",
+      "puntos": 2
+    }
+  ]
+}

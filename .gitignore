@@ -1,0 +1,28 @@
+# Contexto local de Codex; no publicar.
+AGENTS.md
+PROJECT_STATUS.md
+.agents/
+.codex/
+.aws/
+.git-local/
+
+# Python.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Artefactos generados.
+build/
+
+# Entornos y configuración local.
+.venv/
+venv/
+.env
+.env.*
+
+# Editores y sistema operativo.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

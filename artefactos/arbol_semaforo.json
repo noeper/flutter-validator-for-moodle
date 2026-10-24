@@ -1,0 +1,166 @@
+{
+  "sintaxis_correcta": true,
+  "objetos": [
+    {
+      "tipo": "runApp",
+      "linea": 3,
+      "propiedades": {},
+      "argumentos_posicionales": [
+        {
+          "tipo": "MaterialApp",
+          "linea": 4,
+          "propiedades": {
+            "debugShowCheckedModeBanner": "false",
+            "home": {
+              "tipo": "Scaffold",
+              "linea": 6,
+              "propiedades": {
+                "appBar": {
+                  "tipo": "AppBar",
+                  "linea": 7,
+                  "propiedades": {
+                    "title": {
+                      "tipo": "Text",
+                      "linea": 7,
+                      "propiedades": {},
+                      "argumentos_posicionales": [
+                        "'Semáforo'"
+                      ]
+                    }
+                  },
+                  "argumentos_posicionales": []
+                },
+                "body": {
+                  "tipo": "Center",
+                  "linea": 8,
+                  "propiedades": {
+                    "child": {
+                      "tipo": "Semaforo",
+                      "linea": 8,
+                      "propiedades": {},
+                      "argumentos_posicionales": []
+                    }
+                  },
+                  "argumentos_posicionales": []
+                }
+              },
+              "argumentos_posicionales": []
+            }
+          },
+          "argumentos_posicionales": []
+        }
+      ]
+    },
+    {
+      "tipo": "Container",
+      "linea": 16,
+      "propiedades": {
+        "padding": {
+          "tipo": "EdgeInsets.all",
+          "linea": 17,
+          "propiedades": {},
+          "argumentos_posicionales": [
+            "16"
+          ]
+        },
+        "decoration": {
+          "tipo": "BoxDecoration",
+          "linea": 18,
+          "propiedades": {
+            "color": "Colors.black",
+            "borderRadius": {
+              "tipo": "BorderRadius.circular",
+              "linea": 20,
+              "propiedades": {},
+              "argumentos_posicionales": [
+                "18"
+              ]
+            }
+          },
+          "argumentos_posicionales": []
+        },
+        "child": {
+          "tipo": "Column",
+          "linea": 22,
+          "propiedades": {
+            "mainAxisSize": "MainAxisSize.min",
+            "children": [
+              {
+                "tipo": "Container",
+                "linea": 25,
+                "propiedades": {
+                  "width": "90",
+                  "height": "90",
+                  "decoration": {
+                    "tipo": "BoxDecoration",
+                    "linea": 28,
+                    "propiedades": {
+                      "color": "Colors.red",
+                      "shape": "BoxShape.circle"
+                    },
+                    "argumentos_posicionales": []
+                  }
+                },
+                "argumentos_posicionales": []
+              },
+              {
+                "tipo": "SizedBox",
+                "linea": 33,
+                "propiedades": {
+                  "height": "12"
+                },
+                "argumentos_posicionales": []
+              },
+              {
+                "tipo": "Container",
+                "linea": 34,
+                "propiedades": {
+                  "width": "90",
+                  "height": "90",
+                  "decoration": {
+                    "tipo": "BoxDecoration",
+                    "linea": 37,
+                    "propiedades": {
+                      "color": "Colors.yellow",
+                      "shape": "BoxShape.circle"
+                    },
+                    "argumentos_posicionales": []
+                  }
+                },
+                "argumentos_posicionales": []
+              },
+              {
+                "tipo": "SizedBox",
+                "linea": 42,
+                "propiedades": {
+                  "height": "12"
+                },
+                "argumentos_posicionales": []
+              },
+              {
+                "tipo": "Container",
+                "linea": 43,
+                "propiedades": {
+                  "width": "90",
+                  "height": "90",
+                  "decoration": {
+                    "tipo": "BoxDecoration",
+                    "linea": 46,
+                    "propiedades": {
+                      "color": "Colors.green",
+                      "shape": "BoxShape.circle"
+                    },
+                    "argumentos_posicionales": []
+                  }
+                },
+                "argumentos_posicionales": []
+              }
+            ]
+          },
+          "argumentos_posicionales": []
+        }
+      },
+      "argumentos_posicionales": []
+    }
+  ]
+}

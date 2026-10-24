@@ -1,0 +1,32 @@
+{
+  "nombre": "Propiedades de layout y alineación",
+  "criterios": [
+    {
+      "id": "column_main_axis_size",
+      "descripcion": "La columna se ajusta al tamaño de su contenido",
+      "puntos": 1,
+      "regla": "propiedad_widget",
+      "widget": "Column",
+      "propiedad": "mainAxisSize",
+      "valor": "MainAxisSize.min"
+    },
+    {
+      "id": "column_space_evenly",
+      "descripcion": "La columna distribuye uniformemente sus elementos",
+      "puntos": 1,
+      "regla": "propiedad_widget",
+      "widget": "Column",
+      "propiedad": "mainAxisAlignment",
+      "valor": "MainAxisAlignment.spaceEvenly"
+    },
+    {
+      "id": "stack_centrado",
+      "descripcion": "El Stack centra sus elementos",
+      "puntos": 1,
+      "regla": "propiedad_widget",
+      "widget": "Stack",
+      "propiedad": "alignment",
+      "valor": "Alignment.center"
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "nombre": "Mascota virtual: gestión de estado",
+  "criterios": [
+    {
+      "id": "panel_con_estado",
+      "descripcion": "PanelMascota es StatefulWidget y tiene una clase State asociada",
+      "puntos": 1,
+      "regla": "state_asociado_a_widget",
+      "widget": "PanelMascota"
+    },
+    {
+      "id": "app_sin_estado",
+      "descripcion": "MascotaApp sigue siendo StatelessWidget",
+      "puntos": 0.5,
+      "regla": "clase_hereda_de",
+      "clase": "MascotaApp",
+      "herencia": "StatelessWidget"
+    },
+    {
+      "id": "cabecera_sin_estado",
+      "descripcion": "CabeceraJuego sigue siendo StatelessWidget",
+      "puntos": 0.5,
+      "regla": "clase_hereda_de",
+      "clase": "CabeceraJuego",
+      "herencia": "StatelessWidget"
+    },
+    {
+      "id": "dos_enteros_estado",
+      "descripcion": "La clase State contiene dos enteros inicializados a 5",
+      "puntos": 0.66,
+      "regla": "alternativas_puntuadas",
+      "alternativas": [
+        {"puntos": 0.66, "regla": "cantidad_variables_estado", "widget_estado": "PanelMascota", "tipo": "int", "valor_inicial": "5", "cantidad": 2, "comparador": "minimo"},
+        {"puntos": 0.33, "regla": "cantidad_variables_estado", "widget_estado": "PanelMascota", "tipo": "int", "valor_inicial": "5", "cantidad": 1, "comparador": "minimo"}
+      ]
+    },
+    {
+      "id": "booleano_estado",
+      "descripcion": "La clase State contiene un booleano inicializado a false",
+      "puntos": 0.34,
+      "regla": "cantidad_variables_estado",
+      "widget_estado": "PanelMascota",
+      "tipo": "bool",
+      "valor_inicial": "false",
+      "cantidad": 1,
+      "comparador": "minimo"
+    },
+    {
+      "id": "texto_comida",
+      "descripcion": "El texto de Comida muestra un valor del estado",
+      "puntos": 0.5,
+      "regla": "widget_muestra_estado",
+      "widget_estado": "PanelMascota",
+      "ancla": {"widget": "Text", "texto_contiene": "Comida"}
+    },
+    {
+      "id": "texto_diversion",
+      "descripcion": "El texto de Diversión muestra un valor del estado",
+      "puntos": 0.5,
+      "regla": "widget_muestra_estado",
+      "widget_estado": "PanelMascota",
+      "ancla": {"widget": "Text", "texto_contiene": "Diversión"}
+    },
+    {
+      "id": "cara_estado",
+      "descripcion": "caraMascota recibe los valores actuales de comida, diversión y dormir",
+      "puntos": 0.5,
+      "regla": "funcion_recibe_estado",
+      "funcion": "caraMascota",
+      "widget_estado": "PanelMascota",
+      "variables": [
+        {"widget": "Text", "texto_contiene": "Comida"},
+        {"widget": "Text", "texto_contiene": "Diversión"},
+        {"widget": "Switch", "propiedad": "value"}
+      ]
+    },
+    {
+      "id": "comer_incrementa",
+      "descripcion": "Comer aumenta la comida dentro de setState",
+      "puntos": 1,
+      "regla": "callback_modifica_estado",
+      "widget_estado": "PanelMascota",
+      "selector": {"widget": "ElevatedButton", "texto": "Comer"},
+      "propiedad_callback": "onPressed",
+      "ancla": {"widget": "Text", "texto_contiene": "Comida"},
+      "cambio": "incrementar"
+    },
+    {
+      "id": "jugar_incrementa_diversion",
+      "descripcion": "Jugar aumenta la diversión dentro de setState",
+      "puntos": 0.75,
+      "regla": "callback_modifica_estado",
+      "widget_estado": "PanelMascota",
+      "selector": {"widget": "ElevatedButton", "texto": "Jugar"},
+      "propiedad_callback": "onPressed",
+      "ancla": {"widget": "Text", "texto_contiene": "Diversión"},
+      "cambio": "incrementar"
+    },
+    {
+      "id": "jugar_reduce_comida",
+      "descripcion": "Jugar reduce la comida dentro de setState",
+      "puntos": 0.75,
+      "regla": "callback_modifica_estado",
+      "widget_estado": "PanelMascota",
+      "selector": {"widget": "ElevatedButton", "texto": "Jugar"},
+      "propiedad_callback": "onPressed",
+      "ancla": {"widget": "Text", "texto_contiene": "Comida"},
+      "cambio": "decrementar"
+    },
+    {
+      "id": "switch_muestra_estado",
+      "descripcion": "El Switch muestra el estado de dormir",
+      "puntos": 0.5,
+      "regla": "widget_muestra_estado",
+      "widget_estado": "PanelMascota",
+      "ancla": {"widget": "Switch", "propiedad": "value"}
+    },
+    {
+      "id": "switch_actualiza_estado",
+      "descripcion": "El Switch actualiza el estado de dormir dentro de setState",
+      "puntos": 0.5,
+      "regla": "callback_modifica_estado",
+      "widget_estado": "PanelMascota",
+      "selector": {"widget": "Switch"},
+      "propiedad_callback": "onChanged",
+      "ancla": {"widget": "Switch", "propiedad": "value"},
+      "cambio": "asignar"
+    },
+    {
+      "id": "limites",
+      "descripcion": "Los valores permanecen entre 0 y 10",
+      "puntos": 1,
+      "regla": "alternativas_puntuadas",
+      "alternativas": [
+        {
+          "puntos": 1,
+          "regla": "todas",
+          "reglas": [
+            {"regla": "valor_acotado", "widget_estado": "PanelMascota", "selector": {"widget": "ElevatedButton", "texto": "Comer"}, "ancla": {"widget": "Text", "texto_contiene": "Comida"}, "maximo": 10},
+            {"regla": "valor_acotado", "widget_estado": "PanelMascota", "selector": {"widget": "ElevatedButton", "texto": "Jugar"}, "ancla": {"widget": "Text", "texto_contiene": "Diversión"}, "maximo": 10},
+            {"regla": "valor_acotado", "widget_estado": "PanelMascota", "selector": {"widget": "ElevatedButton", "texto": "Jugar"}, "ancla": {"widget": "Text", "texto_contiene": "Comida"}, "minimo": 0}
+          ]
+        },
+        {"puntos": 0.5, "regla": "valor_acotado", "widget_estado": "PanelMascota", "selector": {"widget": "ElevatedButton", "texto": "Comer"}, "ancla": {"widget": "Text", "texto_contiene": "Comida"}, "maximo": 10},
+        {"puntos": 0.5, "regla": "valor_acotado", "widget_estado": "PanelMascota", "selector": {"widget": "ElevatedButton", "texto": "Jugar"}, "ancla": {"widget": "Text", "texto_contiene": "Diversión"}, "maximo": 10},
+        {"puntos": 0.5, "regla": "valor_acotado", "widget_estado": "PanelMascota", "selector": {"widget": "ElevatedButton", "texto": "Jugar"}, "ancla": {"widget": "Text", "texto_contiene": "Comida"}, "minimo": 0}
+      ]
+    },
+    {
+      "id": "comer_bloqueado",
+      "descripcion": "Comer no tiene efecto mientras la mascota duerme",
+      "puntos": 0.5,
+      "regla": "callback_bloqueado_por_estado",
+      "widget_estado": "PanelMascota",
+      "selector": {"widget": "ElevatedButton", "texto": "Comer"},
+      "ancla_bloqueo": {"widget": "Switch", "propiedad": "value"}
+    },
+    {
+      "id": "jugar_bloqueado",
+      "descripcion": "Jugar no tiene efecto mientras la mascota duerme",
+      "puntos": 0.5,
+      "regla": "callback_bloqueado_por_estado",
+      "widget_estado": "PanelMascota",
+      "selector": {"widget": "ElevatedButton", "texto": "Jugar"},
+      "ancla_bloqueo": {"widget": "Switch", "propiedad": "value"}
+    }
+  ]
+}

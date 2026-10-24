@@ -1,0 +1,12 @@
+{"nombre":"Semáforo Flutter: layouts","criterios":[
+{"id":"sin_estado","descripcion":"No utiliza StatefulWidget","puntos":1,"regla":"sin_stateful_widget"},
+{"id":"centrado","descripcion":"El semáforo está centrado","puntos":1,"regla":"jerarquia_widgets","ruta":["Center","Container"],"relacion":"descendiente"},
+{"id":"carcasa_container","descripcion":"La carcasa es un Container","puntos":1,"regla":"jerarquia_widgets","ruta":["Center","Container"],"relacion":"descendiente"},
+{"id":"carcasa_redondeada","descripcion":"La carcasa usa decoration y borderRadius","puntos":1,"regla":"ruta_propiedad","widget":"Container","ruta":["decoration","borderRadius"],"tipo_final":"BorderRadius.circular"},
+{"id":"columna","descripcion":"Las luces se distribuyen en una columna","puntos":1,"regla":"cantidad_widget","widget":"Column","cantidad":1,"comparador":"minimo"},
+{"id":"circulos","descripcion":"Hay tres luces circulares","puntos":1,"regla":"cantidad_widget_filtrado","widget":"Container","cantidad":3,"filtros":[{"ruta":["decoration","shape"],"valor":"BoxShape.circle"}]},
+{"id":"separacion","descripcion":"Hay separación entre las luces","puntos":1,"regla":"secuencia_hijos","padre":"Column","hijos":["Container","SizedBox","Container","SizedBox","Container"]},
+{"id":"padding","descripcion":"La carcasa tiene espacio interior","puntos":1,"regla":"alternativas_puntuadas","alternativas":[{"puntos":1,"regla":"ruta_propiedad","widget":"Container","ruta":["padding"],"tipo_final":"EdgeInsets.all"},{"puntos":0.5,"regla":"jerarquia_widgets","ruta":["Container","Padding","Column"],"relacion":"hijo_directo"}]},
+{"id":"ajuste","descripcion":"La carcasa se ajusta con mainAxisSize.min","puntos":1,"regla":"propiedad_widget","widget":"Column","propiedad":"mainAxisSize","valor":"MainAxisSize.min"},
+{"id":"widget_propio","descripcion":"El semáforo está encapsulado en un widget propio","puntos":1,"regla":"widget_personalizado_usado","raiz_build":"Container"}
+]}

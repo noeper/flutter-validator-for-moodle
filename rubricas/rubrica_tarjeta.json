@@ -1,0 +1,21 @@
+{
+  "nombre": "Tarjeta de perfil",
+  "criterios": [
+    {
+      "id": "estructura_tarjeta",
+      "descripcion": "La tarjeta contiene una columna",
+      "puntos": 2,
+      "regla": "contiene_widget",
+      "padre": "Card",
+      "hijo": "Column"
+    },
+    {
+      "id": "texto_en_columna",
+      "descripcion": "La columna contiene un texto",
+      "puntos": 1,
+      "regla": "contiene_widget",
+      "padre": "Column",
+      "hijo": "Text"
+    }
+  ]
+}

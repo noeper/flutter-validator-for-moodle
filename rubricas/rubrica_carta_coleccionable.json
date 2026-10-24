@@ -1,0 +1,143 @@
+{
+  "nombre": "Carta coleccionable de Dashito",
+  "criterios": [
+    {
+      "id": "fondo",
+      "descripcion": "El fondo de la pantalla es Colors.indigo.shade900",
+      "puntos": 1,
+      "regla": "propiedad_widget",
+      "widget": "Scaffold",
+      "propiedad": "backgroundColor",
+      "valor": "Colors.indigo.shade900"
+    },
+    {
+      "id": "card_color_elevacion",
+      "descripcion": "La Card tiene color Colors.amber.shade100 y elevación 10",
+      "puntos": 1,
+      "regla": "propiedades_widget",
+      "widget": "Card",
+      "propiedades": {"color": "Colors.amber.shade100", "elevation": "10"}
+    },
+    {
+      "id": "card_radio",
+      "descripcion": "La Card tiene esquinas redondeadas de radio 20",
+      "puntos": 1,
+      "regla": "widget_configurado",
+      "configuracion": {
+        "tipo": "Card",
+        "rutas": [
+          {"ruta": ["shape", "borderRadius"], "tipo_final": "BorderRadius.circular", "argumentos": ["20"]}
+        ]
+      }
+    },
+    {
+      "id": "nombre",
+      "descripcion": "Dashito tiene tamaño 24 y negrita",
+      "puntos": 1,
+      "regla": "widget_configurado",
+      "configuracion": {
+        "tipo": "Text",
+        "argumentos": ["'Dashito'"],
+        "rutas": [
+          {"ruta": ["style", "fontSize"], "valor": "24"},
+          {"ruta": ["style", "fontWeight"], "valor": "FontWeight.bold"}
+        ]
+      }
+    },
+    {
+      "id": "puntos_salud",
+      "descripcion": "PS 90 tiene tamaño 18, negrita y color Colors.red",
+      "puntos": 1,
+      "regla": "widget_configurado",
+      "configuracion": {
+        "tipo": "Text",
+        "argumentos": ["'PS 90'"],
+        "rutas": [
+          {"ruta": ["style", "fontSize"], "valor": "18"},
+          {"ruta": ["style", "fontWeight"], "valor": "FontWeight.bold"},
+          {"ruta": ["style", "color"], "valor": "Colors.red"}
+        ]
+      }
+    },
+    {
+      "id": "icono_rayo",
+      "descripcion": "El icono del rayo tiene tamaño 28 y color Colors.orange",
+      "puntos": 0.5,
+      "regla": "widget_configurado",
+      "configuracion": {
+        "tipo": "Icon",
+        "argumentos": ["Icons.bolt"],
+        "propiedades": {"size": "28", "color": "Colors.orange"}
+      }
+    },
+    {
+      "id": "icono_dash",
+      "descripcion": "El icono de Dash tiene tamaño 100 y color Colors.blue",
+      "puntos": 0.5,
+      "regla": "widget_configurado",
+      "configuracion": {
+        "tipo": "Icon",
+        "argumentos": ["Icons.flutter_dash"],
+        "propiedades": {"size": "100", "color": "Colors.blue"}
+      }
+    },
+    {
+      "id": "caja_ilustracion_fondo",
+      "descripcion": "La caja de la ilustración tiene fondo Colors.lightBlue.shade100 y radio 12",
+      "puntos": 1,
+      "regla": "widget_configurado",
+      "configuracion": {
+        "tipo": "Container",
+        "hijo": {"tipo": "Icon", "argumentos": ["Icons.flutter_dash"]},
+        "rutas": [
+          {"ruta": ["decoration", "color"], "valor": "Colors.lightBlue.shade100"},
+          {"ruta": ["decoration", "borderRadius"], "tipo_final": "BorderRadius.circular", "argumentos": ["12"]}
+        ]
+      }
+    },
+    {
+      "id": "caja_ilustracion_borde",
+      "descripcion": "La caja de la ilustración tiene borde Colors.amber de grosor 4",
+      "puntos": 1,
+      "regla": "widget_configurado",
+      "configuracion": {
+        "tipo": "Container",
+        "hijo": {"tipo": "Icon", "argumentos": ["Icons.flutter_dash"]},
+        "rutas": [
+          {"ruta": ["decoration", "border"], "tipo_final": "Border.all"},
+          {"ruta": ["decoration", "border", "color"], "valor": "Colors.amber"},
+          {"ruta": ["decoration", "border", "width"], "valor": "4"}
+        ]
+      }
+    },
+    {
+      "id": "boton_colores",
+      "descripcion": "El botón ¡ATACAR! tiene fondo Colors.red y texto Colors.white",
+      "puntos": 1,
+      "regla": "widget_configurado",
+      "configuracion": {
+        "tipo": "ElevatedButton",
+        "hijo": {"tipo": "Text", "argumentos": ["'¡ATACAR!'"]},
+        "rutas": [
+          {"ruta": ["style", "backgroundColor"], "valor": "Colors.red"},
+          {"ruta": ["style", "foregroundColor"], "valor": "Colors.white"}
+        ]
+      }
+    },
+    {
+      "id": "boton_forma",
+      "descripcion": "El botón tiene padding 40 × 14 y esquinas de radio 30",
+      "puntos": 1,
+      "regla": "widget_configurado",
+      "configuracion": {
+        "tipo": "ElevatedButton",
+        "hijo": {"tipo": "Text", "argumentos": ["'¡ATACAR!'"]},
+        "rutas": [
+          {"ruta": ["style", "padding", "horizontal"], "valor": "40"},
+          {"ruta": ["style", "padding", "vertical"], "valor": "14"},
+          {"ruta": ["style", "shape", "borderRadius"], "tipo_final": "BorderRadius.circular", "argumentos": ["30"]}
+        ]
+      }
+    }
+  ]
+}

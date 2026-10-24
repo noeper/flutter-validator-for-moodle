@@ -1,0 +1,140 @@
+{
+  "sintaxis_correcta": true,
+  "widgets": [
+    {
+      "tipo": "MaterialApp",
+      "linea": 4,
+      "propiedades": {
+        "debugShowCheckedModeBanner": "false",
+        "home": "Scaffold(\n      appBar: AppBar(title: Text('Semáforo')),\n      body: Center(child: Semaforo()),\n    )"
+      }
+    },
+    {
+      "tipo": "Scaffold",
+      "linea": 6,
+      "propiedades": {
+        "appBar": "AppBar(title: Text('Semáforo'))",
+        "body": "Center(child: Semaforo())"
+      }
+    },
+    {
+      "tipo": "AppBar",
+      "linea": 7,
+      "propiedades": {
+        "title": "Text('Semáforo')"
+      }
+    },
+    {
+      "tipo": "Text",
+      "linea": 7,
+      "propiedades": {}
+    },
+    {
+      "tipo": "Center",
+      "linea": 8,
+      "propiedades": {
+        "child": "Semaforo()"
+      }
+    },
+    {
+      "tipo": "Semaforo",
+      "linea": 8,
+      "propiedades": {}
+    },
+    {
+      "tipo": "Container",
+      "linea": 16,
+      "propiedades": {
+        "padding": "const EdgeInsets.all(16)",
+        "decoration": "BoxDecoration(\n      color: Colors.black,\n      borderRadius: BorderRadius.circular(18),\n    )",
+        "child": "Column(\n      mainAxisSize: MainAxisSize.min,\n      children: [\n        Container(\n          width: 90,\n          height: 90,\n          decoration: const BoxDecoration(\n            color: Colors.red,\n            shape: BoxShape.circle,\n          ),\n        ),\n        const SizedBox(height: 12),\n        Container(\n          width: 90,\n          height: 90,\n          decoration: const BoxDecoration(\n            color: Colors.yellow,\n            shape: BoxShape.circle,\n          ),\n        ),\n        const SizedBox(height: 12),\n        Container(\n          width: 90,\n          height: 90,\n          decoration: const BoxDecoration(\n            color: Colors.green,\n            shape: BoxShape.circle,\n          ),\n        ),\n      ],\n    )"
+      }
+    },
+    {
+      "tipo": "EdgeInsets.all",
+      "linea": 17,
+      "propiedades": {}
+    },
+    {
+      "tipo": "BoxDecoration",
+      "linea": 18,
+      "propiedades": {
+        "color": "Colors.black",
+        "borderRadius": "BorderRadius.circular(18)"
+      }
+    },
+    {
+      "tipo": "Column",
+      "linea": 22,
+      "propiedades": {
+        "mainAxisSize": "MainAxisSize.min",
+        "children": "[\n        Container(\n          width: 90,\n          height: 90,\n          decoration: const BoxDecoration(\n            color: Colors.red,\n            shape: BoxShape.circle,\n          ),\n        ),\n        const SizedBox(height: 12),\n        Container(\n          width: 90,\n          height: 90,\n          decoration: const BoxDecoration(\n            color: Colors.yellow,\n            shape: BoxShape.circle,\n          ),\n        ),\n        const SizedBox(height: 12),\n        Container(\n          width: 90,\n          height: 90,\n          decoration: const BoxDecoration(\n            color: Colors.green,\n            shape: BoxShape.circle,\n          ),\n        ),\n      ]"
+      }
+    },
+    {
+      "tipo": "Container",
+      "linea": 25,
+      "propiedades": {
+        "width": "90",
+        "height": "90",
+        "decoration": "const BoxDecoration(\n            color: Colors.red,\n            shape: BoxShape.circle,\n          )"
+      }
+    },
+    {
+      "tipo": "BoxDecoration",
+      "linea": 28,
+      "propiedades": {
+        "color": "Colors.red",
+        "shape": "BoxShape.circle"
+      }
+    },
+    {
+      "tipo": "SizedBox",
+      "linea": 33,
+      "propiedades": {
+        "height": "12"
+      }
+    },
+    {
+      "tipo": "Container",
+      "linea": 34,
+      "propiedades": {
+        "width": "90",
+        "height": "90",
+        "decoration": "const BoxDecoration(\n            color: Colors.yellow,\n            shape: BoxShape.circle,\n          )"
+      }
+    },
+    {
+      "tipo": "BoxDecoration",
+      "linea": 37,
+      "propiedades": {
+        "color": "Colors.yellow",
+        "shape": "BoxShape.circle"
+      }
+    },
+    {
+      "tipo": "SizedBox",
+      "linea": 42,
+      "propiedades": {
+        "height": "12"
+      }
+    },
+    {
+      "tipo": "Container",
+      "linea": 43,
+      "propiedades": {
+        "width": "90",
+        "height": "90",
+        "decoration": "const BoxDecoration(\n            color: Colors.green,\n            shape: BoxShape.circle,\n          )"
+      }
+    },
+    {
+      "tipo": "BoxDecoration",
+      "linea": 46,
+      "propiedades": {
+        "color": "Colors.green",
+        "shape": "BoxShape.circle"
+      }
+    }
+  ]
+}

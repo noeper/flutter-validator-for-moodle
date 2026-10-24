@@ -1,0 +1,8 @@
+[project]
+name = "dart-coderunner"
+version = "0.1.0"
+description = "Evaluador estático de Dart y Flutter para Moodle CodeRunner"
+requires-python = ">=3.10"
+
+[tool.unittest]
+start-directory = "tests"

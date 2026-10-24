@@ -1,0 +1,109 @@
+{
+  "nombre": "Carta de ajuste de 2DAM TV",
+  "criterios": [
+    {
+      "id": "sin_estado",
+      "descripcion": "No utiliza StatefulWidget",
+      "puntos": 1,
+      "regla": "sin_stateful_widget"
+    },
+    {
+      "id": "centrada",
+      "descripcion": "La carta está centrada en la pantalla",
+      "puntos": 1,
+      "regla": "alternativas_puntuadas",
+      "alternativas": [
+        {"puntos": 1, "regla": "jerarquia_widgets", "ruta": ["Center", "CartaAjuste"], "relacion": "hijo_directo"},
+        {"puntos": 1, "regla": "widget_personalizado_usado", "nombre": "CartaAjuste", "raiz_build": "Center"}
+      ]
+    },
+    {
+      "id": "tamano",
+      "descripcion": "Fija el tamaño de la carta en 320 × 220 con SizedBox",
+      "puntos": 1,
+      "regla": "propiedades_widget",
+      "widget": "SizedBox",
+      "propiedades": {"width": "320", "height": "220"}
+    },
+    {
+      "id": "superposicion",
+      "descripcion": "Superpone la etiqueta a las franjas con un Stack",
+      "puntos": 1,
+      "regla": "alternativas_puntuadas",
+      "alternativas": [
+        {"puntos": 1, "regla": "contiene_widget", "padre": "SizedBox", "hijo": "Stack"},
+        {
+          "puntos": 1,
+          "regla": "todas",
+          "reglas": [
+            {"regla": "contiene_widget", "padre": "Stack", "hijo": "SizedBox"},
+            {"regla": "contiene_widget", "padre": "Stack", "hijo": "Positioned"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "etiqueta",
+      "descripcion": "Coloca la etiqueta 2DAM TV con Positioned, top 8 y right 8",
+      "puntos": 1,
+      "regla": "alternativas_puntuadas",
+      "alternativas": [
+        {
+          "puntos": 1,
+          "regla": "secuencia_hijos_configurados",
+          "padre": "Stack",
+          "hijos": [
+            {"tipo": "Column"},
+            {"tipo": "Positioned", "propiedades": {"top": "8", "right": "8"}, "hijo": {"tipo": "Text", "argumentos": ["'2DAM TV'"]}}
+          ]
+        },
+        {
+          "puntos": 1,
+          "regla": "secuencia_hijos_configurados",
+          "padre": "Stack",
+          "hijos": [
+            {"tipo": "SizedBox"},
+            {"tipo": "Positioned", "propiedades": {"top": "8", "right": "8"}, "hijo": {"tipo": "Text", "argumentos": ["'2DAM TV'"]}}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "franjas",
+      "descripcion": "Las siete franjas son Expanded iguales, contiguos y ordenados dentro de un Row",
+      "puntos": 2,
+      "regla": "secuencia_hijos_configurados",
+      "padre": "Row",
+      "hijos": [
+        {"tipo": "Expanded", "hijo": {"tipo": "Container", "propiedades": {"color": "Colors.white"}}},
+        {"tipo": "Expanded", "hijo": {"tipo": "Container", "propiedades": {"color": "Colors.yellow"}}},
+        {"tipo": "Expanded", "hijo": {"tipo": "Container", "propiedades": {"color": "Colors.cyan"}}},
+        {"tipo": "Expanded", "hijo": {"tipo": "Container", "propiedades": {"color": "Colors.green"}}},
+        {"tipo": "Expanded", "hijo": {"tipo": "Container", "propiedades": {"color": "Colors.purpleAccent"}}},
+        {"tipo": "Expanded", "hijo": {"tipo": "Container", "propiedades": {"color": "Colors.red"}}},
+        {"tipo": "Expanded", "hijo": {"tipo": "Container", "propiedades": {"color": "Colors.blue"}}}
+      ]
+    },
+    {
+      "id": "proporcion_vertical",
+      "descripcion": "Las franjas y la banda negra mantienen una proporción vertical de 3 a 1",
+      "puntos": 2,
+      "regla": "secuencia_hijos_configurados",
+      "padre": "Column",
+      "hijos": [
+        {"tipo": "Expanded", "propiedades": {"flex": "3"}, "hijo": {"tipo": "Row"}},
+        {"tipo": "Expanded", "propiedades": {"flex": "1"}, "hijo": {"tipo": "Container", "propiedades": {"color": "Colors.black"}}}
+      ]
+    },
+    {
+      "id": "widget_propio",
+      "descripcion": "La carta está encapsulada en un widget propio",
+      "puntos": 1,
+      "regla": "alternativas_puntuadas",
+      "alternativas": [
+        {"puntos": 1, "regla": "widget_personalizado_usado", "nombre": "CartaAjuste", "raiz_build": "SizedBox"},
+        {"puntos": 1, "regla": "widget_personalizado_usado", "nombre": "CartaAjuste", "raiz_build": "Center"}
+      ]
+    }
+  ]
+}

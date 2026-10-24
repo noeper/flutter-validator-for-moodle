@@ -1,0 +1,13 @@
+import json
+
+from adaptar_coderunner import adaptar
+
+
+codigo = """{{ STUDENT_ANSWER | e('py') }}"""
+
+with open("rubrica.json", encoding="utf-8") as archivo:
+    rubrica = json.load(archivo)
+
+resultado = adaptar(codigo, rubrica)
+
+print(json.dumps(resultado, ensure_ascii=False))

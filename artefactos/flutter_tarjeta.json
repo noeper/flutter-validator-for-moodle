@@ -1,0 +1,219 @@
+{
+  "sintaxis_correcta": true,
+  "objetos": [
+    {
+      "tipo": "runApp",
+      "linea": 3,
+      "propiedades": {},
+      "argumentos_posicionales": [
+        {
+          "tipo": "MaterialApp",
+          "linea": 4,
+          "propiedades": {
+            "home": {
+              "tipo": "Scaffold",
+              "linea": 5,
+              "propiedades": {
+                "body": {
+                  "tipo": "Center",
+                  "linea": 6,
+                  "propiedades": {
+                    "child": {
+                      "tipo": "TarjetaPerfil",
+                      "linea": 7,
+                      "propiedades": {},
+                      "argumentos_posicionales": [],
+                      "implementacion": {
+                        "tipo": "Card",
+                        "linea": 18,
+                        "propiedades": {
+                          "child": {
+                            "tipo": "Padding",
+                            "linea": 19,
+                            "propiedades": {
+                              "padding": {
+                                "tipo": "EdgeInsets.all",
+                                "linea": 20,
+                                "propiedades": {},
+                                "argumentos_posicionales": [
+                                  "20"
+                                ]
+                              },
+                              "child": {
+                                "tipo": "Column",
+                                "linea": 21,
+                                "propiedades": {
+                                  "mainAxisSize": "MainAxisSize.min",
+                                  "children": [
+                                    {
+                                      "tipo": "Icon",
+                                      "linea": 24,
+                                      "propiedades": {
+                                        "size": "48"
+                                      },
+                                      "argumentos_posicionales": [
+                                        "Icons.person"
+                                      ]
+                                    },
+                                    {
+                                      "tipo": "Text",
+                                      "linea": 25,
+                                      "propiedades": {},
+                                      "argumentos_posicionales": [
+                                        "'Ana'"
+                                      ]
+                                    },
+                                    {
+                                      "tipo": "Text",
+                                      "linea": 26,
+                                      "propiedades": {},
+                                      "argumentos_posicionales": [
+                                        "'Desarrolladora'"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "argumentos_posicionales": []
+                              }
+                            },
+                            "argumentos_posicionales": []
+                          }
+                        },
+                        "argumentos_posicionales": []
+                      }
+                    }
+                  },
+                  "argumentos_posicionales": []
+                }
+              },
+              "argumentos_posicionales": []
+            }
+          },
+          "argumentos_posicionales": []
+        }
+      ]
+    },
+    {
+      "tipo": "Card",
+      "linea": 18,
+      "propiedades": {
+        "child": {
+          "tipo": "Padding",
+          "linea": 19,
+          "propiedades": {
+            "padding": {
+              "tipo": "EdgeInsets.all",
+              "linea": 20,
+              "propiedades": {},
+              "argumentos_posicionales": [
+                "20"
+              ]
+            },
+            "child": {
+              "tipo": "Column",
+              "linea": 21,
+              "propiedades": {
+                "mainAxisSize": "MainAxisSize.min",
+                "children": [
+                  {
+                    "tipo": "Icon",
+                    "linea": 24,
+                    "propiedades": {
+                      "size": "48"
+                    },
+                    "argumentos_posicionales": [
+                      "Icons.person"
+                    ]
+                  },
+                  {
+                    "tipo": "Text",
+                    "linea": 25,
+                    "propiedades": {},
+                    "argumentos_posicionales": [
+                      "'Ana'"
+                    ]
+                  },
+                  {
+                    "tipo": "Text",
+                    "linea": 26,
+                    "propiedades": {},
+                    "argumentos_posicionales": [
+                      "'Desarrolladora'"
+                    ]
+                  }
+                ]
+              },
+              "argumentos_posicionales": []
+            }
+          },
+          "argumentos_posicionales": []
+        }
+      },
+      "argumentos_posicionales": []
+    }
+  ],
+  "clases": [
+    {
+      "nombre": "TarjetaPerfil",
+      "herencia": "extends StatelessWidget",
+      "build": {
+        "tipo": "Card",
+        "linea": 18,
+        "propiedades": {
+          "child": {
+            "tipo": "Padding",
+            "linea": 19,
+            "propiedades": {
+              "padding": {
+                "tipo": "EdgeInsets.all",
+                "linea": 20,
+                "propiedades": {},
+                "argumentos_posicionales": [
+                  "20"
+                ]
+              },
+              "child": {
+                "tipo": "Column",
+                "linea": 21,
+                "propiedades": {
+                  "mainAxisSize": "MainAxisSize.min",
+                  "children": [
+                    {
+                      "tipo": "Icon",
+                      "linea": 24,
+                      "propiedades": {
+                        "size": "48"
+                      },
+                      "argumentos_posicionales": [
+                        "Icons.person"
+                      ]
+                    },
+                    {
+                      "tipo": "Text",
+                      "linea": 25,
+                      "propiedades": {},
+                      "argumentos_posicionales": [
+                        "'Ana'"
+                      ]
+                    },
+                    {
+                      "tipo": "Text",
+                      "linea": 26,
+                      "propiedades": {},
+                      "argumentos_posicionales": [
+                        "'Desarrolladora'"
+                      ]
+                    }
+                  ]
+                },
+                "argumentos_posicionales": []
+              }
+            },
+            "argumentos_posicionales": []
+          }
+        },
+        "argumentos_posicionales": []
+      }
+    }
+  ]
+}

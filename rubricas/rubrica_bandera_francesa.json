@@ -1,0 +1,126 @@
+{
+    "nombre": "Bandera francesa: layouts",
+    "criterios": [
+        {
+            "id": "sin_estado",
+            "descripcion": "No utiliza StatefulWidget",
+            "puntos": 1,
+            "regla": "sin_stateful_widget"
+        },
+        {
+            "id": "centrada",
+            "descripcion": "La bandera está centrada",
+            "puntos": 1,
+            "regla": "jerarquia_widgets",
+            "ruta": [
+                "Center",
+                "Row"
+            ],
+            "relacion": "descendiente"
+        },
+        {
+            "id": "tamano",
+            "descripcion": "Fija el tamaño de la bandera con SizedBox",
+            "puntos": 2,
+            "regla": "alternativas_puntuadas",
+            "alternativas": [
+                {
+                    "puntos": 2,
+                    "regla": "envoltorio_layout",
+                    "widget": "SizedBox",
+                    "hijo": "Row",
+                    "propiedades": [
+                        "width",
+                        "height"
+                    ]
+                },
+                {
+                    "puntos": 0.5,
+                    "regla": "envoltorio_layout",
+                    "widget": "Container",
+                    "hijo": "Row",
+                    "propiedades": [
+                        "width",
+                        "height"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "fila",
+            "descripcion": "Utiliza una fila para distribuir las franjas",
+            "puntos": 1,
+            "regla": "cantidad_widget",
+            "widget": "Row",
+            "cantidad": 1,
+            "comparador": "minimo"
+        },
+        {
+            "id": "tres_contenedores",
+            "descripcion": "La fila contiene tres Container",
+            "puntos": 1,
+            "regla": "cantidad_widget",
+            "widget": "Container",
+            "cantidad": 3,
+            "dentro_de": "Row",
+            "relacion": "descendiente"
+        },
+        {
+            "id": "propiedades_minimas",
+            "descripcion": "Los Container de las franjas utilizan únicamente color",
+            "puntos": 1,
+            "regla": "alternativas_puntuadas",
+            "alternativas": [
+                {
+                    "puntos": 1,
+                    "regla": "propiedades_exactas_en_ambito",
+                    "padre": "Row",
+                    "widget": "Container",
+                    "cantidad": 3,
+                    "propiedades": [
+                        "color"
+                    ],
+                    "relacion": "descendiente"
+                },
+                {
+                    "puntos": 0.5,
+                    "regla": "propiedades_requeridas_en_ambito",
+                    "padre": "Row",
+                    "widget": "Container",
+                    "cantidad": 3,
+                    "propiedades": [
+                        "color"
+                    ],
+                    "relacion": "descendiente"
+                }
+            ]
+        },
+        {
+            "id": "tercios",
+            "descripcion": "Las tres franjas ocupan tercios adaptables del ancho",
+            "puntos": 2,
+            "regla": "hijos_expandidos_equivalentes",
+            "padre": "Row",
+            "cantidad": 3,
+            "hijo": "Container"
+        },
+        {
+            "id": "widget_propio",
+            "descripcion": "La bandera está encapsulada en un widget propio",
+            "puntos": 1,
+            "regla": "alternativas_puntuadas",
+            "alternativas": [
+                {
+                    "puntos": 1,
+                    "regla": "widget_personalizado_usado",
+                    "raiz_build": "SizedBox"
+                },
+                {
+                    "puntos": 1,
+                    "regla": "widget_personalizado_usado",
+                    "raiz_build": "Container"
+                }
+            ]
+        }
+    ]
+}
