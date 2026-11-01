@@ -1,0 +1,39 @@
+<div
+  style="border: 1px solid #DCDFE5; border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif; background-color: #ffffff; margin: 12px 0;">
+  <!-- CABECERA -->
+  <div
+    style="background-color: #4174c0; color: white; padding: 6px 12px; font-size: 15px; font-weight: 600;">
+    🧠 Tienda Flutter · 4. El botón pertenece a cada tarjeta: VoidCallback</div>
+  <div style="padding: 20px; font-size: 1.05rem; line-height: 1.6; overflow-x: auto;">
+    <!-- OBJETIVO -->
+    <div style="margin: 12px 0;">
+      <p style="margin: 0 0 6px 0; font-weight: bold; color: #4174c0;">🎯
+        Objetivo</p>
+      <p style="margin: 0;">Pasar al hijo una acción de compra ya preparada por el padre.</p>
+    </div>
+    <hr style="border: none; border-top: 1px solid #DCDFE5; margin: 16px 0;">
+    <!-- ENUNCIADO -->
+    <div style="margin: 12px 0;">
+      <p style="margin: 0 0 6px 0; font-weight: bold; color: #4174c0;">📋
+        Enunciado</p>
+      <div><p>Los botones separados de sus productos son incómodos: hay que buscar qué botón corresponde a cada tarjeta. Vamos a colocar un botón Comprar dentro de cada TarjetaProducto.</p><p>La tarjeta conoce su diseño y detecta el clic. El padre guarda el dinero compartido y sabe comprar. Por eso el padre le entrega una acción: <code>VoidCallback</code> es un nombre para <code>void Function()</code>, una función sin argumentos y sin resultado.</p><ol><li>Añade en TarjetaProducto <code>final VoidCallback onComprar;</code> y <code>required this.onComprar</code> en su constructor.</li><li>Añade un botón Comprar dentro de la tarjeta y conéctalo con <code>onPressed: onComprar</code>. El hijo no debe tener saldo propio ni usar setState.</li><li>Al crear cada tarjeta, el padre le pasa una acción preparada: por ejemplo <code>onComprar: () { comprar(2); }</code>. Hazlo con los tres precios.</li><li>Retira los botones de compra de la pantalla padre. Conserva el método comprar y las comprobaciones del paso anterior.</li></ol><p><strong>Criterios de corrección:</strong></p>{{CRITERIOS}}<p><strong>Código inicial · main.dart completo</strong></p>
+      <div style="margin: 12px 0;">
+
+  <div style="text-align: right; font-size: 11px; color: #888; margin-bottom: 4px;">
+    📋 Selecciona y copia
+  </div>
+
+  <pre style="background-color: #f6f8fa; border: 1px solid #E1E4E8; border-radius: 6px; padding: 12px; font-family: monospace; font-size: 14px; line-height: 1.5; overflow-x: auto; margin: 0;"><code>{{CODIGO_INICIAL}}</code></pre>
+
+</div>
+      </div>
+    </div>
+    <hr style="border: none; border-top: 1px solid #DCDFE5; margin: 16px 0;">
+    <!-- ENTREGABLE -->
+    <div style="margin: 12px 0;">
+      <p style="margin: 0 0 6px 0; font-weight: bold; color: #4174c0;">📤
+        Entregable</p>
+      <p style="margin: 0;">Pega tu main.dart completo. Mantén Tienda, _TiendaState, TarjetaProducto y los nombres de propiedades y métodos solicitados. Comprueba y mejora tu respuesta sin penalización.</p>
+    </div>
+  </div>
+</div>

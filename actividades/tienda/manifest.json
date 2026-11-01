@@ -1,0 +1,56 @@
+[
+  {
+    "paso": 1,
+    "actividad": "tienda_01_tarjetas",
+    "nombre": "Tienda Flutter · 01 · Una tarjeta que merece ser un componente",
+    "idnumber": "dad-tienda-funciones-01",
+    "pregunta_moodle": 151704574,
+    "opcional": false,
+    "peso_cuestionario": 1
+  },
+  {
+    "paso": 2,
+    "actividad": "tienda_02_metodo",
+    "nombre": "Tienda Flutter · 02 · Un método para realizar una compra",
+    "idnumber": "dad-tienda-funciones-02",
+    "pregunta_moodle": 151704575,
+    "opcional": false,
+    "peso_cuestionario": 1
+  },
+  {
+    "paso": 3,
+    "actividad": "tienda_03_funcion_anonima",
+    "nombre": "Tienda Flutter · 03 · Una función anónima para elegir qué comprar",
+    "idnumber": "dad-tienda-funciones-03",
+    "pregunta_moodle": 151704576,
+    "opcional": false,
+    "peso_cuestionario": 1
+  },
+  {
+    "paso": 4,
+    "actividad": "tienda_04_voidcallback",
+    "nombre": "Tienda Flutter · 04 · El botón pertenece a cada tarjeta: VoidCallback",
+    "idnumber": "dad-tienda-funciones-04",
+    "pregunta_moodle": 151704577,
+    "opcional": false,
+    "peso_cuestionario": 1
+  },
+  {
+    "paso": 5,
+    "actividad": "tienda_05_parametro",
+    "nombre": "Tienda Flutter · 05 · El hijo ya conoce el precio: enviarlo al padre",
+    "idnumber": "dad-tienda-funciones-05",
+    "pregunta_moodle": 151704578,
+    "opcional": false,
+    "peso_cuestionario": 1
+  },
+  {
+    "paso": 6,
+    "actividad": "tienda_06_retorno",
+    "nombre": "Tienda Flutter · 06 · Ampliación: ¿se ha aceptado la compra?",
+    "idnumber": "dad-tienda-funciones-06",
+    "pregunta_moodle": 151704579,
+    "opcional": true,
+    "peso_cuestionario": 0
+  }
+]

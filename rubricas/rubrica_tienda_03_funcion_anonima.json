@@ -1,0 +1,70 @@
+{
+  "nombre": "Tienda Flutter · Paso 3",
+  "criterios": [
+    {
+      "id": "metodo_parametro",
+      "descripcion": "comprar recibe un precio entero y no devuelve un valor",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "estado_de": "Tienda",
+      "patron": "\\bvoid\\s+comprar\\s*\\(\\s*int\\s+precio\\s*\\)"
+    },
+    {
+      "id": "saldo_insuficiente",
+      "descripcion": "Se impide comprar con saldo insuficiente para ese precio",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "estado_de": "Tienda",
+      "patron": "if\\s*\\(\\s*saldo\\s*<\\s*precio\\s*\\)\\s*(?:\\{\\s*)?return\\s*;"
+    },
+    {
+      "id": "descuento",
+      "descripcion": "Se descuenta el precio recibido dentro de setState",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "estado_de": "Tienda",
+      "patron": "setState\\s*\\(\\s*\\(\\s*\\)\\s*\\{\\s*saldo\\s*(?:-=\\s*precio|=\\s*saldo\\s*-\\s*precio)\\s*;"
+    },
+    {
+      "id": "funciones_anonimas",
+      "descripcion": "Cada botón espera al clic y compra por su precio: 2, 5 y 12",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "onPressed\\s*:\\s*\\(\\s*\\)\\s*(?:\\{\\s*comprar\\s*\\(\\s*2\\s*\\)\\s*;\\s*\\}|=>\\s*comprar\\s*\\(\\s*2\\s*\\))"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "onPressed\\s*:\\s*\\(\\s*\\)\\s*(?:\\{\\s*comprar\\s*\\(\\s*5\\s*\\)\\s*;\\s*\\}|=>\\s*comprar\\s*\\(\\s*5\\s*\\))"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "onPressed\\s*:\\s*\\(\\s*\\)\\s*(?:\\{\\s*comprar\\s*\\(\\s*12\\s*\\)\\s*;\\s*\\}|=>\\s*comprar\\s*\\(\\s*12\\s*\\))"
+        }
+      ]
+    },
+    {
+      "id": "saldo_padre",
+      "descripcion": "El saldo de 20 euros pertenece al State de Tienda y se muestra en pantalla",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "\\bint\\s+saldo\\s*=\\s*20\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "Text\\s*\\([^;]*\\$\\{?\\s*saldo\\b"
+        }
+      ]
+    }
+  ]
+}

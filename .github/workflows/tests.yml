@@ -17,3 +17,26 @@ jobs:
           python-version: '3.12'
       - name: Probar motor, rúbricas y soluciones
         run: python -m unittest discover -s tests -v
+  flutter:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+          cache: true
+      - name: Preparar los doce ficheros Dart
+        run: python scripts/preparar_pruebas_flutter.py
+      - name: Resolver dependencias
+        working-directory: tests/flutter
+        run: flutter pub get
+      - name: Analizar soluciones y códigos iniciales
+        working-directory: tests/flutter
+        run: flutter analyze --no-pub
+      - name: Probar compras y comunicación entre widgets
+        working-directory: tests/flutter
+        run: flutter test --no-pub --reporter expanded

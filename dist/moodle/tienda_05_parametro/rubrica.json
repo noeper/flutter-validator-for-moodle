@@ -1,0 +1,71 @@
+{
+  "nombre": "Tienda Flutter · Paso 5",
+  "criterios": [
+    {
+      "id": "tarjeta_sin_estado",
+      "descripcion": "TarjetaProducto es reutilizable y no posee estado propio",
+      "puntos": 1,
+      "regla": "clase_hereda_de",
+      "clase": "TarjetaProducto",
+      "herencia": "StatelessWidget"
+    },
+    {
+      "id": "tipo_parametro",
+      "descripcion": "El callback obligatorio recibe un int y devuelve void",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "final\\s+void\\s+Function\\s*\\(\\s*int\\s*\\)\\s+onComprar\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "required\\s+this\\.onComprar"
+        }
+      ]
+    },
+    {
+      "id": "precio_del_hijo",
+      "descripcion": "El hijo entrega su precio al callback cuando se pulsa el botón",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "clase": "TarjetaProducto",
+      "patron": "onPressed\\s*:\\s*\\(\\s*\\)\\s*(?:\\{\\s*onComprar\\s*\\(\\s*precio\\s*\\)\\s*;\\s*\\}|=>\\s*onComprar\\s*\\(\\s*precio\\s*\\))"
+    },
+    {
+      "id": "misma_funcion",
+      "descripcion": "Las tres tarjetas reciben comprar directamente, sin repetir los precios en callbacks",
+      "puntos": 1,
+      "regla": "ambito_cuenta",
+      "estado_de": "Tienda",
+      "patron": "onComprar\\s*:\\s*comprar\\s*[,)]",
+      "minimo": 3
+    },
+    {
+      "id": "reglas_padre",
+      "descripcion": "El método del padre sigue validando y actualizando su saldo",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "\\bvoid\\s+comprar\\s*\\(\\s*int\\s+precio\\s*\\)"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "if\\s*\\(\\s*saldo\\s*<\\s*precio\\s*\\)\\s*(?:\\{\\s*)?return\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "setState\\s*\\(\\s*\\(\\s*\\)\\s*\\{\\s*saldo\\s*(?:-=\\s*precio|=\\s*saldo\\s*-\\s*precio)\\s*;"
+        }
+      ]
+    }
+  ]
+}

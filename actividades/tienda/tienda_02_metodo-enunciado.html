@@ -1,0 +1,39 @@
+<div
+  style="border: 1px solid #DCDFE5; border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif; background-color: #ffffff; margin: 12px 0;">
+  <!-- CABECERA -->
+  <div
+    style="background-color: #4174c0; color: white; padding: 6px 12px; font-size: 15px; font-weight: 600;">
+    🧠 Tienda Flutter · 2. Un método para realizar una compra</div>
+  <div style="padding: 20px; font-size: 1.05rem; line-height: 1.6; overflow-x: auto;">
+    <!-- OBJETIVO -->
+    <div style="margin: 12px 0;">
+      <p style="margin: 0 0 6px 0; font-weight: bold; color: #4174c0;">🎯
+        Objetivo</p>
+      <p style="margin: 0;">Definir un método en el State y entregar su nombre a dos botones.</p>
+    </div>
+    <hr style="border: none; border-top: 1px solid #DCDFE5; margin: 16px 0;">
+    <!-- ENUNCIADO -->
+    <div style="margin: 12px 0;">
+      <p style="margin: 0 0 6px 0; font-weight: bold; color: #4174c0;">📋
+        Enunciado</p>
+      <div><p>Queremos comprar una pegatina desde dos lugares: un botón principal y otro de compra rápida. Ambos deben hacer exactamente lo mismo: comprobar el dinero y descontar 2 euros. Esa operación merece un único método.</p><p>Un método es una función declarada dentro de una clase. En este caso irá dentro de <code>_TiendaState</code>, al mismo nivel que <code>build</code>, no dentro de él.</p><p><code>void</code> significa que no devuelve un resultado; <code>()</code> indica que no recibe argumentos. En <code>onPressed: comprarPegatina</code> entregas la función para ejecutarla después. Si añades <code>()</code>, intentas ejecutarla mientras se construye la interfaz.</p><ol><li>Crea <code>void comprarPegatina()</code> en <code>_TiendaState</code>. Si <code>saldo &lt; 2</code>, termina con <code>return;</code>.</li><li>Cuando haya dinero, descuenta 2 dentro de <code>setState(() { ... });</code>. La función anónima de setState agrupa el cambio que debe reflejarse en pantalla.</li><li>Debajo de los productos añade un ElevatedButton y un TextButton. Conecta ambos con <code>onPressed: comprarPegatina</code>, sin paréntesis.</li><li>Comprueba: saldo inicial 20; dos pulsaciones, 16; diez compras, 0; otra pulsación mantiene 0.</li></ol><p><strong>Criterios de corrección:</strong></p>{{CRITERIOS}}<p><strong>Código inicial · main.dart completo</strong></p>
+      <div style="margin: 12px 0;">
+
+  <div style="text-align: right; font-size: 11px; color: #888; margin-bottom: 4px;">
+    📋 Selecciona y copia
+  </div>
+
+  <pre style="background-color: #f6f8fa; border: 1px solid #E1E4E8; border-radius: 6px; padding: 12px; font-family: monospace; font-size: 14px; line-height: 1.5; overflow-x: auto; margin: 0;"><code>{{CODIGO_INICIAL}}</code></pre>
+
+</div>
+      </div>
+    </div>
+    <hr style="border: none; border-top: 1px solid #DCDFE5; margin: 16px 0;">
+    <!-- ENTREGABLE -->
+    <div style="margin: 12px 0;">
+      <p style="margin: 0 0 6px 0; font-weight: bold; color: #4174c0;">📤
+        Entregable</p>
+      <p style="margin: 0;">Pega tu main.dart completo. Mantén Tienda, _TiendaState, TarjetaProducto y los nombres de propiedades y métodos solicitados. Comprueba y mejora tu respuesta sin penalización.</p>
+    </div>
+  </div>
+</div>

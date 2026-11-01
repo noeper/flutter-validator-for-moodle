@@ -28,6 +28,12 @@ ACTIVIDADES = {
     "callbacks_04_informacion": "rubrica_callbacks_04_informacion.json",
     "callbacks_05_opcional": "rubrica_callbacks_05_opcional.json",
     "clasico_dam_daw": "rubrica_clasico_dam_daw.json",
+    "tienda_01_tarjetas": "rubrica_tienda_01_tarjetas.json",
+    "tienda_02_metodo": "rubrica_tienda_02_metodo.json",
+    "tienda_03_funcion_anonima": "rubrica_tienda_03_funcion_anonima.json",
+    "tienda_04_voidcallback": "rubrica_tienda_04_voidcallback.json",
+    "tienda_05_parametro": "rubrica_tienda_05_parametro.json",
+    "tienda_06_retorno": "rubrica_tienda_06_retorno.json",
 }
 
 

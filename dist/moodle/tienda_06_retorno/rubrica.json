@@ -1,0 +1,93 @@
+{
+  "nombre": "Tienda Flutter · Paso 6",
+  "criterios": [
+    {
+      "id": "tipo_retorno",
+      "descripcion": "El hijo recibe un bool Function(int) y el padre implementa bool comprar(int precio)",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "final\\s+bool\\s+Function\\s*\\(\\s*int\\s*\\)\\s+onComprar\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "\\bbool\\s+comprar\\s*\\(\\s*int\\s+precio\\s*\\)"
+        }
+      ]
+    },
+    {
+      "id": "rechazo",
+      "descripcion": "El padre devuelve false antes de descontar cuando falta saldo",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "estado_de": "Tienda",
+      "patron": "if\\s*\\(\\s*saldo\\s*<\\s*precio\\s*\\)\\s*(?:\\{\\s*)?return\\s+false\\s*;"
+    },
+    {
+      "id": "aceptacion",
+      "descripcion": "El padre descuenta en setState y devuelve true después",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "setState\\s*\\(\\s*\\(\\s*\\)\\s*\\{\\s*saldo\\s*(?:-=\\s*precio|=\\s*saldo\\s*-\\s*precio)\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "setState\\s*\\([\\s\\S]*?\\}\\s*\\)\\s*;\\s*return\\s+true\\s*;"
+        }
+      ]
+    },
+    {
+      "id": "usa_resultado",
+      "descripcion": "La tarjeta guarda el resultado de onComprar(precio) y lo usa para elegir el mensaje",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "clase": "TarjetaProducto",
+      "patron": "(?:final|bool)\\s+(\\w+)\\s*=\\s*onComprar\\s*\\(\\s*precio\\s*\\)\\s*;[\\s\\S]*?\\b\\1\\s*\\?"
+    },
+    {
+      "id": "mensaje_local",
+      "descripcion": "La tarjeta muestra un SnackBar con el mensaje de compra o de saldo insuficiente",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "ScaffoldMessenger\\s*\\.\\s*of\\s*\\(\\s*context\\s*\\)\\s*\\.\\s*showSnackBar"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "SnackBar\\s*\\("
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "Compra realizada"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "Saldo insuficiente"
+        }
+      ]
+    },
+    {
+      "id": "tarjeta_sin_estado",
+      "descripcion": "TarjetaProducto es reutilizable y no posee estado propio",
+      "puntos": 1,
+      "regla": "clase_hereda_de",
+      "clase": "TarjetaProducto",
+      "herencia": "StatelessWidget"
+    }
+  ]
+}

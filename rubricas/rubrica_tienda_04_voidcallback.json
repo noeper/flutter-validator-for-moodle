@@ -1,0 +1,106 @@
+{
+  "nombre": "Tienda Flutter · Paso 4",
+  "criterios": [
+    {
+      "id": "tarjeta_sin_estado",
+      "descripcion": "TarjetaProducto es reutilizable y no posee estado propio",
+      "puntos": 1,
+      "regla": "clase_hereda_de",
+      "clase": "TarjetaProducto",
+      "herencia": "StatelessWidget"
+    },
+    {
+      "id": "voidcallback",
+      "descripcion": "La tarjeta recibe un VoidCallback onComprar obligatorio",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "final\\s+VoidCallback\\s+onComprar\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "required\\s+this\\.onComprar"
+        }
+      ]
+    },
+    {
+      "id": "boton_hijo",
+      "descripcion": "El botón Comprar está en la tarjeta y ejecuta su callback al pulsarlo",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "onPressed\\s*:\\s*onComprar\\s*[,)]"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "Text\\s*\\(\\s*['\\\"]Comprar['\\\"]"
+        }
+      ]
+    },
+    {
+      "id": "acciones_preparadas",
+      "descripcion": "El padre prepara las tres acciones de compra por 2, 5 y 12",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "onComprar\\s*:\\s*\\(\\s*\\)\\s*(?:\\{\\s*comprar\\s*\\(\\s*2\\s*\\)\\s*;\\s*\\}|=>\\s*comprar\\s*\\(\\s*2\\s*\\))"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "onComprar\\s*:\\s*\\(\\s*\\)\\s*(?:\\{\\s*comprar\\s*\\(\\s*5\\s*\\)\\s*;\\s*\\}|=>\\s*comprar\\s*\\(\\s*5\\s*\\))"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "onComprar\\s*:\\s*\\(\\s*\\)\\s*(?:\\{\\s*comprar\\s*\\(\\s*12\\s*\\)\\s*;\\s*\\}|=>\\s*comprar\\s*\\(\\s*12\\s*\\))"
+        }
+      ]
+    },
+    {
+      "id": "reglas_padre",
+      "descripcion": "El padre sigue comprobando y descontando el saldo",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "\\bvoid\\s+comprar\\s*\\(\\s*int\\s+precio\\s*\\)"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "if\\s*\\(\\s*saldo\\s*<\\s*precio\\s*\\)\\s*(?:\\{\\s*)?return\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "setState\\s*\\(\\s*\\(\\s*\\)\\s*\\{\\s*saldo\\s*(?:-=\\s*precio|=\\s*saldo\\s*-\\s*precio)\\s*;"
+        }
+      ]
+    },
+    {
+      "id": "sin_botones_duplicados",
+      "descripcion": "Los botones de compra ya no se repiten en la pantalla padre",
+      "puntos": 1,
+      "regla": "no",
+      "subregla": {
+        "regla": "ambito_contiene",
+        "estado_de": "Tienda",
+        "patron": "\\b(?:ElevatedButton|TextButton)\\s*\\("
+      }
+    }
+  ]
+}

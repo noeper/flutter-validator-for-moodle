@@ -1,0 +1,39 @@
+<div
+  style="border: 1px solid #DCDFE5; border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif; background-color: #ffffff; margin: 12px 0;">
+  <!-- CABECERA -->
+  <div
+    style="background-color: #4174c0; color: white; padding: 6px 12px; font-size: 15px; font-weight: 600;">
+    🧠 Tienda Flutter · 5. El hijo ya conoce el precio: enviarlo al padre</div>
+  <div style="padding: 20px; font-size: 1.05rem; line-height: 1.6; overflow-x: auto;">
+    <!-- OBJETIVO -->
+    <div style="margin: 12px 0;">
+      <p style="margin: 0 0 6px 0; font-weight: bold; color: #4174c0;">🎯
+        Objetivo</p>
+      <p style="margin: 0;">Comunicar un dato del hijo usando un callback con parámetro.</p>
+    </div>
+    <hr style="border: none; border-top: 1px solid #DCDFE5; margin: 16px 0;">
+    <!-- ENUNCIADO -->
+    <div style="margin: 12px 0;">
+      <p style="margin: 0 0 6px 0; font-weight: bold; color: #4174c0;">📋
+        Enunciado</p>
+      <div><p>En el paso anterior escribíamos el precio dos veces por tarjeta: en precio y dentro de la acción de compra. Podrían no coincidir: una tarjeta podría mostrar 5 y cobrar 2. El hijo ya conoce su precio, así que debe enviarlo cuando pide comprar.</p><p><code>void Function(int)</code> describe una función que recibe un entero y no devuelve resultado. Esta es una alternativa al diseño con VoidCallback: evitamos repetir el dato.</p><ol><li>Cambia la propiedad de TarjetaProducto a <code>final void Function(int) onComprar;</code>. Sigue siendo obligatoria en el constructor.</li><li>El botón del hijo debe esperar al clic y ejecutar <code>onComprar(precio)</code> usando una función anónima.</li><li>En las tres tarjetas del padre pasa directamente <code>onComprar: comprar</code>. El precio se escribirá solo en la propiedad precio.</li><li>El método comprar del padre no cambia. Prueba los mismos casos de saldo y comprueba que el importe cobrado coincide con el mostrado.</li></ol><p><strong>Criterios de corrección:</strong></p>{{CRITERIOS}}<p><strong>Código inicial · main.dart completo</strong></p>
+      <div style="margin: 12px 0;">
+
+  <div style="text-align: right; font-size: 11px; color: #888; margin-bottom: 4px;">
+    📋 Selecciona y copia
+  </div>
+
+  <pre style="background-color: #f6f8fa; border: 1px solid #E1E4E8; border-radius: 6px; padding: 12px; font-family: monospace; font-size: 14px; line-height: 1.5; overflow-x: auto; margin: 0;"><code>{{CODIGO_INICIAL}}</code></pre>
+
+</div>
+      </div>
+    </div>
+    <hr style="border: none; border-top: 1px solid #DCDFE5; margin: 16px 0;">
+    <!-- ENTREGABLE -->
+    <div style="margin: 12px 0;">
+      <p style="margin: 0 0 6px 0; font-weight: bold; color: #4174c0;">📤
+        Entregable</p>
+      <p style="margin: 0;">Pega tu main.dart completo. Mantén Tienda, _TiendaState, TarjetaProducto y los nombres de propiedades y métodos solicitados. Comprueba y mejora tu respuesta sin penalización.</p>
+    </div>
+  </div>
+</div>

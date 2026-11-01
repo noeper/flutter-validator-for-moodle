@@ -8,6 +8,8 @@ producir puntuación parcial y feedback compatible con CodeRunner.
 - `src/`: motor Python y biblioteca compilada.
 - `rubricas/`: criterios de cada actividad.
 - `ejemplos/`: soluciones y casos Dart.
+- `iniciales/`: aplicaciones de partida que todavía no resuelven el ejercicio.
+- `actividades/tienda/`: descripción inicial, enunciados y feedback regenerables.
 - `tests/`: pruebas automáticas.
 - `moodle/`: personalización común de CodeRunner.
 - `scripts/`: preparación de paquetes para Moodle.
@@ -39,6 +41,41 @@ en el campo **Personalización** de CodeRunner y no se sube como archivo.
 También están disponibles `callbacks_01_boton`, `callbacks_02_contador`,
 `callbacks_03_personalizar`, `callbacks_04_informacion`,
 `callbacks_05_opcional` y `clasico_dam_daw`.
+
+## Tienda Flutter: funciones y callbacks paso a paso
+
+Seis pasos de una tienda con saldo compartido, todos en un único `main.dart`.
+Incluye rúbricas, códigos iniciales, soluciones y contenido HTML basado en
+Activity template y Feedback template de
+[moodle-ui-kit](https://github.com/noeper/moodle-ui-kit).
+
+Las actividades `tienda_01_tarjetas`, `tienda_02_metodo`,
+`tienda_03_funcion_anonima`, `tienda_04_voidcallback`, `tienda_05_parametro`
+y `tienda_06_retorno` se preparan con `scripts/preparar_moodle.py`.
+
+Para regenerar las siete preguntas (una descripción inicial y seis CodeRunner):
+
+```bash
+python3 scripts/exportar_tienda.py
+```
+
+Produce `build/tienda-flutter.xml`, con los códigos actuales y todos los archivos
+de soporte. No crea ni actualiza nada en Moodle. El peso cero del paso 6 se
+configura en el cuestionario, no en la importación del banco. Ver la
+[guía de la tienda](docs/tienda-flutter.md).
+
+Las pruebas del corrector están en `tests/test_tienda.py`. Para comprobar también
+las aplicaciones reales con Flutter (versión probada: 3.35.7):
+
+```bash
+python3 scripts/preparar_pruebas_flutter.py
+cd tests/flutter
+flutter pub get
+flutter analyze --no-pub
+flutter test --no-pub
+```
+
+GitHub Actions ejecuta las pruebas Python y las de Flutter en trabajos separados.
 
 ## Sincronización con DAD
 

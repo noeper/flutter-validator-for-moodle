@@ -12,6 +12,10 @@ __pycache__/
 .pytest_cache/
 .coverage
 
+# Pruebas Flutter: las fuentes se copian desde ejemplos/ e iniciales/.
+.dart_tool/
+tests/flutter/lib/
+
 # Artefactos generados.
 build/
 

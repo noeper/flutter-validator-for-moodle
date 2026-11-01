@@ -1,0 +1,64 @@
+{
+  "nombre": "Tienda Flutter · Paso 2",
+  "criterios": [
+    {
+      "id": "saldo_padre",
+      "descripcion": "El saldo de 20 euros pertenece al State de Tienda y se muestra en pantalla",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "\\bint\\s+saldo\\s*=\\s*20\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "Text\\s*\\([^;]*\\$\\{?\\s*saldo\\b"
+        }
+      ]
+    },
+    {
+      "id": "tarjeta_sin_estado",
+      "descripcion": "TarjetaProducto es reutilizable y no posee estado propio",
+      "puntos": 1,
+      "regla": "clase_hereda_de",
+      "clase": "TarjetaProducto",
+      "herencia": "StatelessWidget"
+    },
+    {
+      "id": "metodo",
+      "descripcion": "comprarPegatina es un método void sin parámetros del State, fuera de build",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "estado_de": "Tienda",
+      "patron": "\\bvoid\\s+comprarPegatina\\s*\\(\\s*\\)\\s*\\{"
+    },
+    {
+      "id": "saldo_insuficiente",
+      "descripcion": "Se impide la compra cuando el saldo es menor que 2",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "estado_de": "Tienda",
+      "patron": "if\\s*\\(\\s*saldo\\s*<\\s*2\\s*\\)\\s*(?:\\{\\s*)?return\\s*;"
+    },
+    {
+      "id": "descuento",
+      "descripcion": "Se descuentan 2 euros dentro de setState",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "estado_de": "Tienda",
+      "patron": "setState\\s*\\(\\s*\\(\\s*\\)\\s*\\{\\s*saldo\\s*(?:-=\\s*2|=\\s*saldo\\s*-\\s*2)\\s*;"
+    },
+    {
+      "id": "dos_botones",
+      "descripcion": "Los dos botones comparten comprarPegatina sin ejecutarlo durante build",
+      "puntos": 1,
+      "regla": "ambito_cuenta",
+      "estado_de": "Tienda",
+      "patron": "onPressed\\s*:\\s*comprarPegatina\\s*[,)]",
+      "minimo": 2
+    }
+  ]
+}

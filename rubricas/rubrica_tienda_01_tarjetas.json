@@ -1,0 +1,92 @@
+{
+  "nombre": "Tienda Flutter · Paso 1",
+  "criterios": [
+    {
+      "id": "tarjeta_sin_estado",
+      "descripcion": "TarjetaProducto es reutilizable y no posee estado propio",
+      "puntos": 1,
+      "regla": "clase_hereda_de",
+      "clase": "TarjetaProducto",
+      "herencia": "StatelessWidget"
+    },
+    {
+      "id": "datos",
+      "descripcion": "La tarjeta recibe nombre y precio por constructor y los utiliza",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "final\\s+String\\s+nombre\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "final\\s+int\\s+precio\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "required\\s+this\\.nombre"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "required\\s+this\\.precio"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "Text\\s*\\(\\s*nombre\\s*\\)"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaProducto",
+          "patron": "\\$\\{?\\s*precio\\b"
+        }
+      ]
+    },
+    {
+      "id": "tres_productos",
+      "descripcion": "Se reutiliza TarjetaProducto con Pegatina (2), Libreta (5) y Camiseta (12)",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "TarjetaProducto\\s*\\([^;]*?nombre\\s*:\\s*['\\\"]Pegatina['\\\"][^;]*?precio\\s*:\\s*2\\b"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "TarjetaProducto\\s*\\([^;]*?nombre\\s*:\\s*['\\\"]Libreta['\\\"][^;]*?precio\\s*:\\s*5\\b"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "TarjetaProducto\\s*\\([^;]*?nombre\\s*:\\s*['\\\"]Camiseta['\\\"][^;]*?precio\\s*:\\s*12\\b"
+        }
+      ]
+    },
+    {
+      "id": "saldo_padre",
+      "descripcion": "El saldo de 20 euros pertenece al State de Tienda y se muestra en pantalla",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "\\bint\\s+saldo\\s*=\\s*20\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "Tienda",
+          "patron": "Text\\s*\\([^;]*\\$\\{?\\s*saldo\\b"
+        }
+      ]
+    }
+  ]
+}
