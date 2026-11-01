@@ -1,0 +1,45 @@
+{
+  "nombre": "Ejercicio 1 · Botón y SnackBar",
+  "criterios": [
+    {
+      "id": "tarjeta_sin_estado",
+      "descripcion": "TarjetaEvento sigue siendo un StatelessWidget",
+      "puntos": 1,
+      "regla": "clase_hereda_de",
+      "clase": "TarjetaEvento",
+      "herencia": "StatelessWidget"
+    },
+    {
+      "id": "boton",
+      "descripcion": "TarjetaEvento tiene un botón con el texto «Inscribirse»",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "clase": "TarjetaEvento",
+      "patron": "(?:ElevatedButton|FilledButton|OutlinedButton|TextButton)(?:\\.icon)?\\s*\\([\\s\\S]*?['\\\"]Inscribirse['\\\"]"
+    },
+    {
+      "id": "posicion",
+      "descripcion": "El botón está debajo del número de plazas disponibles",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "clase": "TarjetaEvento",
+      "patron": "Text\\s*\\([^;]*?plazasDisponibles[\\s\\S]*?(?:ElevatedButton|FilledButton|OutlinedButton|TextButton)(?:\\.icon)?\\s*\\("
+    },
+    {
+      "id": "snackbar",
+      "descripcion": "Al pulsar el botón, onPressed muestra un SnackBar con ScaffoldMessenger",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "clase": "TarjetaEvento",
+      "patron": "onPressed\\s*:[\\s\\S]*?ScaffoldMessenger\\s*\\.\\s*of\\s*\\(\\s*context\\s*\\)\\s*\\.\\s*showSnackBar\\s*\\("
+    },
+    {
+      "id": "mensaje",
+      "descripcion": "El SnackBar muestra «Inscripción realizada»",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "clase": "TarjetaEvento",
+      "patron": "SnackBar\\s*\\([\\s\\S]*?['\\\"]Inscripción realizada"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "nombre": "Ejercicio 5 · Plazas que se agotan",
+  "criterios": [
+    {
+      "id": "opcional",
+      "descripcion": "onInscribirse es opcional: tipo con ? y sin required",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaEvento",
+          "patron": "final\\s+(?:void\\s+Function\\s*\\(\\s*String(?:\\s+\\w+)?\\s*\\)|ValueChanged\\s*<\\s*String\\s*>)\\s*\\?\\s*onInscribirse\\s*;"
+        },
+        {
+          "regla": "no",
+          "subregla": {
+            "regla": "ambito_contiene",
+            "clase": "TarjetaEvento",
+            "patron": "required\\s+this\\.onInscribirse\\b"
+          }
+        }
+      ]
+    },
+    {
+      "id": "deshabilitado",
+      "descripcion": "El botón queda deshabilitado (onPressed: null) cuando no hay callback",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "clase": "TarjetaEvento",
+      "patron": "onPressed\\s*:\\s*(?:onInscribirse\\s*==\\s*null\\s*\\?\\s*null|onInscribirse\\s*!=\\s*null\\s*\\?[\\s\\S]*?:\\s*null)"
+    },
+    {
+      "id": "sin_callback",
+      "descripcion": "En la pantalla hay al menos una tarjeta sin callback",
+      "puntos": 1,
+      "regla": "llamadas_sin_propiedad",
+      "estado_de": "PantallaEventos",
+      "llamada": "TarjetaEvento",
+      "propiedad": "onInscribirse",
+      "minimo": 1
+    },
+    {
+      "id": "plazas_estado",
+      "descripcion": "Las plazas de los eventos se guardan en la pantalla y llegan a las tarjetas por plazasDisponibles",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_cuenta",
+          "estado_de": "PantallaEventos",
+          "patron": "\\bint\\s+_?\\w+\\s*=\\s*[1-9]\\d*\\s*;",
+          "minimo": 2
+        },
+        {
+          "regla": "llamadas_con_propiedad",
+          "estado_de": "PantallaEventos",
+          "llamada": "TarjetaEvento",
+          "propiedad": "plazasDisponibles",
+          "patron_valor": "^_?[a-zA-Z]\\w*$",
+          "minimo": 2
+        }
+      ]
+    },
+    {
+      "id": "restar_plazas",
+      "descripcion": "Al inscribirse, las plazas del evento bajan dentro de setState()",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "estado_de": "PantallaEventos",
+      "patron": "setState\\s*\\(\\s*\\(\\s*\\)\\s*(?:\\{[^}]*?|=>[^;]*?)(?:--\\s*\\w+|\\w+\\s*--|\\w+\\s*-=\\s*1\\b|\\w+\\s*=\\s*\\w+\\s*-\\s*1\\b)"
+    },
+    {
+      "id": "agotadas",
+      "descripcion": "Cuando no quedan plazas, la pantalla pasa null y el botón se apaga",
+      "puntos": 2,
+      "regla": "llamadas_con_propiedad",
+      "estado_de": "PantallaEventos",
+      "llamada": "TarjetaEvento",
+      "propiedad": "onInscribirse",
+      "patron_valor": "^_?\\w+\\s*(?:>|>=|<=|<|==|!=)\\s*\\d+\\s*\\?[\\s\\S]*:\\s*null\\s*$|^_?\\w+\\s*(?:<=|==|<)\\s*0\\s*\\?\\s*null\\s*:",
+      "minimo": 2
+    },
+    {
+      "id": "contador",
+      "descripcion": "La AppBar muestra el contador de inscripciones (una variable de la pantalla) y sube dentro de setState()",
+      "puntos": 1,
+      "regla": "contador_en_llamada",
+      "estado_de": "PantallaEventos",
+      "llamada": "AppBar"
+    }
+  ]
+}

@@ -22,6 +22,12 @@ ACTIVIDADES = {
     "carta_coleccionable": "rubrica_carta_coleccionable.json",
     "mascota_virtual": "rubrica_mascota_virtual.json",
     "semaforo": "rubrica_semaforo_generica.json",
+    "callbacks_01_boton": "rubrica_callbacks_01_boton.json",
+    "callbacks_02_contador": "rubrica_callbacks_02_contador.json",
+    "callbacks_03_personalizar": "rubrica_callbacks_03_personalizar.json",
+    "callbacks_04_informacion": "rubrica_callbacks_04_informacion.json",
+    "callbacks_05_opcional": "rubrica_callbacks_05_opcional.json",
+    "clasico_dam_daw": "rubrica_clasico_dam_daw.json",
 }
 
 

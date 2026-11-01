@@ -1,0 +1,99 @@
+{
+  "nombre": "Ejercicio 2 · Callback y contador",
+  "criterios": [
+    {
+      "id": "tarjeta_sin_estado",
+      "descripcion": "TarjetaEvento sigue siendo un StatelessWidget",
+      "puntos": 1,
+      "regla": "clase_hereda_de",
+      "clase": "TarjetaEvento",
+      "herencia": "StatelessWidget"
+    },
+    {
+      "id": "tipo_callback",
+      "descripcion": "TarjetaEvento declara onInscribirse como VoidCallback, final y obligatorio",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaEvento",
+          "patron": "final\\s+(?:VoidCallback|void\\s+Function\\s*\\(\\s*\\))\\s+onInscribirse\\s*;"
+        },
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaEvento",
+          "patron": "required\\s+this\\.onInscribirse\\b"
+        }
+      ]
+    },
+    {
+      "id": "boton_callback",
+      "descripcion": "El botón ejecuta el callback recibido",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "clase": "TarjetaEvento",
+      "patron": "onPressed\\s*:\\s*(?:onInscribirse\\b|\\(\\s*\\)\\s*(?:=>|\\{)\\s*onInscribirse\\s*(?:\\.call)?\\s*\\(\\s*\\))"
+    },
+    {
+      "id": "tarjeta_sin_snackbar",
+      "descripcion": "TarjetaEvento ya no muestra el SnackBar por su cuenta",
+      "puntos": 1,
+      "regla": "no",
+      "subregla": {
+        "regla": "ambito_contiene",
+        "clase": "TarjetaEvento",
+        "patron": "showSnackBar\\s*\\("
+      }
+    },
+    {
+      "id": "pantalla_con_estado",
+      "descripcion": "PantallaEventos es un StatefulWidget con su clase State",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "clase": "PantallaEventos",
+          "patron": "extends\\s+StatefulWidget"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "PantallaEventos",
+          "patron": "\\bint\\s+_?\\w+\\s*=\\s*0\\s*;"
+        }
+      ]
+    },
+    {
+      "id": "contador",
+      "descripcion": "La AppBar muestra el contador de inscripciones (una variable de la pantalla) y sube dentro de setState()",
+      "puntos": 1,
+      "regla": "contador_en_llamada",
+      "estado_de": "PantallaEventos",
+      "llamada": "AppBar"
+    },
+    {
+      "id": "pantalla_snackbar",
+      "descripcion": "La pantalla proporciona el callback y es ella quien muestra «Inscripción realizada»",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "PantallaEventos",
+          "patron": "onInscribirse\\s*:"
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "PantallaEventos",
+          "patron": "showSnackBar\\s*\\("
+        },
+        {
+          "regla": "ambito_contiene",
+          "estado_de": "PantallaEventos",
+          "patron": "['\\\"]Inscripción realizada"
+        }
+      ]
+    }
+  ]
+}

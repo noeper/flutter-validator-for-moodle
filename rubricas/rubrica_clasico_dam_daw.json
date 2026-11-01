@@ -1,0 +1,247 @@
+{
+  "nombre": "El clásico: 2DAM vs 2DAW",
+  "criterios": [
+    {
+      "id": "marcador_propiedades",
+      "descripcion": "MarcadorEquipo es StatelessWidget y recibe nombre (String) y puntos (int) como propiedades final y obligatorias",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "clase_hereda_de",
+          "clase": "MarcadorEquipo",
+          "herencia": "StatelessWidget"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "MarcadorEquipo",
+          "patron": "final\\s+String\\s+nombre\\s*;"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "MarcadorEquipo",
+          "patron": "final\\s+int\\s+puntos\\s*;"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "MarcadorEquipo",
+          "patron": "required\\s+this\\.nombre\\b"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "MarcadorEquipo",
+          "patron": "required\\s+this\\.puntos\\b"
+        }
+      ]
+    },
+    {
+      "id": "marcador_defecto",
+      "descripcion": "En MarcadorEquipo, color e icono son opcionales y tienen un valor por defecto",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "clase_contiene",
+          "clase": "MarcadorEquipo",
+          "patron": "final\\s+Color\\??\\s+color\\s*;"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "MarcadorEquipo",
+          "patron": "final\\s+IconData\\??\\s+icono\\s*;"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "MarcadorEquipo",
+          "patron": "(?<!required\\s)this\\.color\\s*=\\s*\\S"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "MarcadorEquipo",
+          "patron": "(?<!required\\s)this\\.icono\\s*=\\s*\\S"
+        }
+      ]
+    },
+    {
+      "id": "boton_callback",
+      "descripcion": "BotonPuntos es StatelessWidget y recibe el callback alSumar de tipo ValueChanged<int>, obligatorio",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "clase_hereda_de",
+          "clase": "BotonPuntos",
+          "herencia": "StatelessWidget"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "BotonPuntos",
+          "patron": "final\\s+(ValueChanged\\s*<\\s*int\\s*>|void\\s+Function\\s*\\(\\s*int(\\s+\\w+)?\\s*\\))\\s+alSumar\\s*;"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "BotonPuntos",
+          "patron": "required\\s+this\\.alSumar\\b"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "BotonPuntos",
+          "patron": "final\\s+int\\s+puntos\\s*;"
+        }
+      ]
+    },
+    {
+      "id": "boton_avisa",
+      "descripcion": "Al pulsarlo, BotonPuntos avisa al padre con alSumar(puntos)",
+      "puntos": 1,
+      "regla": "clase_contiene",
+      "clase": "BotonPuntos",
+      "patron": "onPressed\\s*:[^;]*?\\balSumar\\s*(\\.call)?\\s*\\(\\s*puntos\\s*\\)"
+    },
+    {
+      "id": "estado_padre",
+      "descripcion": "Solo la pantalla es StatefulWidget y suma los puntos dentro de setState()",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "codigo_cuenta",
+          "patron": "extends\\s+StatefulWidget\\b",
+          "minimo": 1,
+          "maximo": 1
+        },
+        {
+          "regla": "codigo_contiene",
+          "patron": "extends\\s+State\\s*<"
+        },
+        {
+          "regla": "codigo_contiene",
+          "patron": "setState\\s*\\(\\s*\\(\\s*\\)\\s*(\\{[^}]*?|=>[^;]*?)(\\+=\\s*\\w+|=\\s*\\w+\\s*\\+\\s*\\w+)"
+        }
+      ]
+    },
+    {
+      "id": "panel_equipo",
+      "descripcion": "PanelEquipo agrupa un MarcadorEquipo y los BotonPuntos, y les pasa el callback alSumar",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "clase_hereda_de",
+          "clase": "PanelEquipo",
+          "herencia": "StatelessWidget"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "PanelEquipo",
+          "patron": "\\bMarcadorEquipo\\s*\\("
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "PanelEquipo",
+          "patron": "\\bBotonPuntos\\s*\\("
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "PanelEquipo",
+          "patron": "alSumar\\s*:\\s*alSumar\\b"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "PanelEquipo",
+          "patron": "final\\s+(ValueChanged\\s*<\\s*int\\s*>|void\\s+Function\\s*\\(\\s*int(\\s+\\w+)?\\s*\\))\\s+alSumar\\s*;"
+        }
+      ]
+    },
+    {
+      "id": "dos_paneles",
+      "descripcion": "La pantalla muestra dos PanelEquipo, uno para cada equipo",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "codigo_cuenta",
+          "patron": "(?<!const\\s)(?<!class\\s)\\bPanelEquipo\\s*\\((?!\\s*\\{)",
+          "minimo": 2
+        },
+        {
+          "regla": "codigo_contiene",
+          "patron": "['\"]2DAM['\"]"
+        },
+        {
+          "regla": "codigo_contiene",
+          "patron": "['\"]2DAW['\"]"
+        }
+      ]
+    },
+    {
+      "id": "ganador",
+      "descripcion": "Muestra el ganador al llegar a 21 puntos con el operador ternario",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "codigo_contiene",
+          "patron": "\\b21\\b"
+        },
+        {
+          "regla": "codigo_contiene",
+          "patron": "Gana\\s+2DAM"
+        },
+        {
+          "regla": "codigo_contiene",
+          "patron": "Gana\\s+2DAW"
+        },
+        {
+          "regla": "codigo_contiene",
+          "patron": "\\?[^;]{0,300}Gana"
+        }
+      ]
+    },
+    {
+      "id": "botones_desactivados",
+      "descripcion": "BotonPuntos tiene la propiedad activo y queda desactivado (onPressed: null) cuando no está activo",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "clase_contiene",
+          "clase": "BotonPuntos",
+          "patron": "final\\s+bool\\s+activo\\s*;"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "BotonPuntos",
+          "patron": "onPressed\\s*:\\s*(!\\s*activo\\s*\\?\\s*null\\s*:|activo\\s*\\?[^;]*?:\\s*null|activo\\s*==\\s*true\\s*\\?[^;]*?:\\s*null|activo\\s*==\\s*false\\s*\\?\\s*null\\s*:)"
+        }
+      ]
+    },
+    {
+      "id": "boton_accion",
+      "descripcion": "BotonAccion recibe un VoidCallback? y se usa para el botón Reiniciar",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "clase_hereda_de",
+          "clase": "BotonAccion",
+          "herencia": "StatelessWidget"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "BotonAccion",
+          "patron": "final\\s+(VoidCallback\\s*\\?|void\\s+Function\\s*\\(\\s*\\)\\s*\\?)\\s+alPulsar\\s*;"
+        },
+        {
+          "regla": "clase_contiene",
+          "clase": "BotonAccion",
+          "patron": "onPressed\\s*:\\s*alPulsar\\b"
+        },
+        {
+          "regla": "codigo_contiene",
+          "patron": "BotonAccion\\s*\\([^;]*?['\"]Reiniciar['\"]"
+        }
+      ]
+    }
+  ]
+}

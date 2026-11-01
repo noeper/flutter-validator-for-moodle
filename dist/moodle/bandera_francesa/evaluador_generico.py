@@ -353,6 +353,69 @@ def hijos_expandidos_equivalentes(elemento, padre, cantidad, hijo):
     return False
 
 
+def _numero_positivo(valor):
+    """Reconoce literales numéricos positivos sin ejecutar código Dart."""
+    try:
+        return float(valor) > 0
+    except (TypeError, ValueError):
+        return False
+
+
+def _lados_edge_insets(nodo):
+    """Normaliza los constructores EdgeInsets habituales a L, T, R, B."""
+    if not isinstance(nodo, dict):
+        return None
+    tipo = nodo.get("tipo")
+    props = nodo.get("propiedades", {})
+    args = nodo.get("argumentos_posicionales", [])
+    if tipo == "EdgeInsets.symmetric":
+        horizontal = props.get("horizontal", "0")
+        vertical = props.get("vertical", "0")
+        return horizontal, vertical, horizontal, vertical
+    if tipo == "EdgeInsets.only":
+        return (props.get("left", "0"), props.get("top", "0"),
+                props.get("right", "0"), props.get("bottom", "0"))
+    if tipo == "EdgeInsets.fromLTRB" and len(args) == 4:
+        return tuple(args)
+    if tipo == "EdgeInsets.all" and len(args) == 1:
+        return (args[0],) * 4
+    return None
+
+
+def _cumple_requisito_ruta(actual, requisito):
+    if "valor" in requisito and actual != requisito["valor"]:
+        return False
+    tipos = requisito.get("tipos_finales")
+    if tipos is not None and (
+        not isinstance(actual, dict) or actual.get("tipo") not in tipos
+    ):
+        return False
+    if "tipo_final" in requisito and (
+        not isinstance(actual, dict)
+        or actual.get("tipo") != requisito["tipo_final"]
+    ):
+        return False
+    if "argumentos" in requisito and (
+        not isinstance(actual, dict)
+        or actual.get("argumentos_posicionales") != requisito["argumentos"]
+    ):
+        return False
+    if "argumento_positivo" in requisito:
+        if not isinstance(actual, dict):
+            return False
+        indice = requisito["argumento_positivo"]
+        argumentos = actual.get("argumentos_posicionales", [])
+        if indice >= len(argumentos) or not _numero_positivo(argumentos[indice]):
+            return False
+    if "edge_insets" in requisito:
+        lados = _lados_edge_insets(actual)
+        esperado = requisito["edge_insets"]
+        if lados != (esperado["left"], esperado["top"],
+                     esperado["right"], esperado["bottom"]):
+            return False
+    return True
+
+
 def _cumple_configuracion(nodo, configuracion):
     if nodo.get("tipo") != configuracion["tipo"]:
         return False
@@ -360,22 +423,18 @@ def _cumple_configuracion(nodo, configuracion):
     if not all(propiedades.get(nombre) == valor for nombre, valor in
                configuracion.get("propiedades", {}).items()):
         return False
+    if not all(nombre in propiedades
+               for nombre in configuracion.get("propiedades_presentes", [])):
+        return False
+    if not all(_numero_positivo(propiedades.get(nombre))
+               for nombre in configuracion.get("propiedades_positivas", [])):
+        return False
     argumentos = configuracion.get("argumentos")
     if argumentos is not None and nodo.get("argumentos_posicionales") != argumentos:
         return False
     for requisito in configuracion.get("rutas", []):
         actual = valor_ruta(nodo, requisito["ruta"])
-        if "valor" in requisito and actual != requisito["valor"]:
-            return False
-        if "tipo_final" in requisito and (
-            not isinstance(actual, dict)
-            or actual.get("tipo") != requisito["tipo_final"]
-        ):
-            return False
-        if "argumentos" in requisito and (
-            not isinstance(actual, dict)
-            or actual.get("argumentos_posicionales") != requisito["argumentos"]
-        ):
+        if not _cumple_requisito_ruta(actual, requisito):
             return False
     hijo = configuracion.get("hijo")
     if hijo is not None and not any(
@@ -404,6 +463,33 @@ def widget_configurado(elemento, configuracion):
     """Busca una instancia que cumpla una configuración anidada completa."""
     return any(_cumple_configuracion(nodo, configuracion)
                for nodo in iterar_widgets(elemento))
+
+
+def secuencia_flex_configurada(elemento, padre, proporcion, hijos):
+    """Comprueba Expanded ordenados, normalizando flex omitido a uno."""
+    for nodo in iterar_widgets(elemento):
+        if nodo.get("tipo") != padre:
+            continue
+        candidatos = widgets_directos(nodo)
+        if len(candidatos) != len(hijos):
+            continue
+        if any(c.get("tipo") != "Expanded" for c in candidatos):
+            continue
+        try:
+            flex = [float(c.get("propiedades", {}).get("flex", "1"))
+                    for c in candidatos]
+            esperada = [float(valor) for valor in proporcion]
+        except (TypeError, ValueError):
+            continue
+        if any(valor <= 0 for valor in flex + esperada):
+            continue
+        if any(flex[i] * esperada[0] != flex[0] * esperada[i]
+               for i in range(len(flex))):
+            continue
+        if all(_cumple_configuracion(candidato, esperado)
+               for candidato, esperado in zip(candidatos, hijos)):
+            return True
+    return False
 
 
 def _normalizar(texto):
@@ -580,8 +666,172 @@ def valor_acotado(analisis, selector, propiedad_callback, ancla,
     return bool(comprobaciones) and all(comprobaciones)
 
 
+def _fuente_clase(codigo, clase):
+    """Texto de la clase (cabecera y cuerpo), equilibrando llaves."""
+    coincidencia = re.search(rf"\bclass\s+{re.escape(clase)}\b[^{{]*\{{", codigo or "")
+    if not coincidencia:
+        return None
+    nivel = 1
+    for indice in range(coincidencia.end(), len(codigo)):
+        if codigo[indice] == "{":
+            nivel += 1
+        elif codigo[indice] == "}":
+            nivel -= 1
+            if nivel == 0:
+                return codigo[coincidencia.start():indice + 1]
+    return None
+
+
+def _sin_comentarios(codigo):
+    codigo = re.sub(r"/\*.*?\*/", "", codigo or "", flags=re.S)
+    return re.sub(r"//[^\n]*", "", codigo)
+
+
+def clase_contiene(analisis, clase, patron):
+    fuente = _fuente_clase(_sin_comentarios(analisis.get("codigo")), clase)
+    return bool(fuente and re.search(patron, fuente, flags=re.S))
+
+
+def codigo_contiene(analisis, patron):
+    return bool(re.search(patron, _sin_comentarios(analisis.get("codigo")), flags=re.S))
+
+
+def codigo_cuenta(analisis, patron, minimo=None, maximo=None):
+    total = len(re.findall(patron, _sin_comentarios(analisis.get("codigo")), flags=re.S))
+    return ((minimo is None or total >= minimo)
+            and (maximo is None or total <= maximo))
+
+
+def _fuente_estado(codigo, widget):
+    """Texto de la clase State asociada al widget."""
+    coincidencia = re.search(
+        rf"\bclass\s+(\w+)\s+extends\s+State\s*<\s*{re.escape(widget)}\s*>", codigo or "")
+    return _fuente_clase(codigo, coincidencia.group(1)) if coincidencia else None
+
+
+def _argumentos_llamadas(fuente, nombre):
+    """Texto entre los paréntesis de cada llamada nombre(...)."""
+    resultado = []
+    for coincidencia in re.finditer(rf"(?<![\w.]){re.escape(nombre)}\s*\(", fuente or ""):
+        nivel = 1
+        for indice in range(coincidencia.end(), len(fuente)):
+            if fuente[indice] in "([{":
+                nivel += 1
+            elif fuente[indice] in ")]}":
+                nivel -= 1
+                if nivel == 0:
+                    resultado.append(fuente[coincidencia.end():indice])
+                    break
+    return resultado
+
+
+def _valor_argumento(argumentos, propiedad):
+    """Expresión pasada a propiedad: en unos argumentos, o None."""
+    coincidencia = re.search(rf"(?<![\w.]){re.escape(propiedad)}\s*:", argumentos)
+    if not coincidencia:
+        return None
+    nivel = 0
+    for indice in range(coincidencia.end(), len(argumentos)):
+        caracter = argumentos[indice]
+        if caracter in "([{":
+            nivel += 1
+        elif caracter in ")]}":
+            nivel -= 1
+        elif caracter == "," and nivel == 0:
+            return argumentos[coincidencia.end():indice].strip()
+    return argumentos[coincidencia.end():].strip()
+
+
+def _fuente_ambito(analisis, criterio):
+    codigo = _sin_comentarios(analisis.get("codigo"))
+    if "estado_de" in criterio:
+        return _fuente_estado(codigo, criterio["estado_de"])
+    if "clase" in criterio:
+        return _fuente_clase(codigo, criterio["clase"])
+    return codigo
+
+
+def ambito_contiene(analisis, criterio):
+    fuente = _fuente_ambito(analisis, criterio)
+    return bool(fuente and re.search(criterio["patron"], fuente, flags=re.S))
+
+
+def ambito_cuenta(analisis, criterio):
+    fuente = _fuente_ambito(analisis, criterio)
+    total = len(re.findall(criterio["patron"], fuente or "", flags=re.S))
+    return ((criterio.get("minimo") is None or total >= criterio["minimo"])
+            and (criterio.get("maximo") is None or total <= criterio["maximo"]))
+
+
+def llamadas_sin_propiedad(analisis, criterio):
+    fuente = _fuente_ambito(analisis, criterio)
+    total = sum(_valor_argumento(a, criterio["propiedad"]) is None
+                for a in _argumentos_llamadas(fuente, criterio["llamada"]))
+    return total >= criterio.get("minimo", 1)
+
+
+def llamadas_con_propiedad(analisis, criterio):
+    fuente = _fuente_ambito(analisis, criterio)
+    valores = [_valor_argumento(a, criterio["propiedad"])
+               for a in _argumentos_llamadas(fuente, criterio["llamada"])]
+    valores = [v for v in valores if v is not None]
+    if "patron_valor" in criterio:
+        valores = [v for v in valores if re.search(criterio["patron_valor"], v, flags=re.S)]
+    return len(valores) >= criterio.get("minimo", 1)
+
+
+def textos_distintos_en_propiedad(analisis, criterio):
+    """Cada valor de la propiedad aporta los textos literales que contiene."""
+    fuente = _fuente_ambito(analisis, criterio)
+    literales = re.compile(r"'(?:[^'\\]|\\.)*'|\"(?:[^\"\\]|\\.)*\"")
+    distintos = set()
+    for argumentos in _argumentos_llamadas(fuente, criterio["llamada"]):
+        valor = _valor_argumento(argumentos, criterio["propiedad"])
+        if valor:
+            textos = tuple(t.strip() for t in literales.findall(valor) if len(t) > 2)
+            if textos:
+                distintos.add(textos)
+    return len(distintos) >= criterio.get("minimo", 2)
+
+
+def contador_en_llamada(analisis, criterio):
+    """Un texto de la llamada (AppBar...) interpola una variable que se incrementa en setState."""
+    fuente = _fuente_ambito(analisis, criterio) or ""
+    nombres = set()
+    for argumentos in _argumentos_llamadas(fuente, criterio["llamada"]):
+        for literal in re.findall(r"'(?:[^'\\]|\\.)*'|\"(?:[^\"\\]|\\.)*\"", argumentos):
+            nombres.update(re.findall(r"\$\{?\s*(_?[A-Za-z]\w*)", literal))
+        nombres.update(re.findall(r"\b(_?[A-Za-z]\w*)\s*\.\s*toString\s*\(\s*\)", argumentos))
+    for cuerpo in _cuerpos_set_state(fuente):
+        for nombre in nombres:
+            if _cambia_variable(cuerpo, nombre, "incrementar"):
+                return True
+    return False
+
+
 def aplicar_regla(elemento, criterio, analisis=None):
     regla = criterio["regla"]
+    if regla == "contador_en_llamada":
+        return contador_en_llamada(analisis, criterio)
+    if regla == "no":
+        return not aplicar_regla(elemento, criterio["subregla"], analisis)
+    if regla == "ambito_contiene":
+        return ambito_contiene(analisis, criterio)
+    if regla == "ambito_cuenta":
+        return ambito_cuenta(analisis, criterio)
+    if regla == "llamadas_sin_propiedad":
+        return llamadas_sin_propiedad(analisis, criterio)
+    if regla == "llamadas_con_propiedad":
+        return llamadas_con_propiedad(analisis, criterio)
+    if regla == "textos_distintos_en_propiedad":
+        return textos_distintos_en_propiedad(analisis, criterio)
+    if regla == "clase_contiene":
+        return clase_contiene(analisis, criterio["clase"], criterio["patron"])
+    if regla == "codigo_contiene":
+        return codigo_contiene(analisis, criterio["patron"])
+    if regla == "codigo_cuenta":
+        return codigo_cuenta(analisis, criterio["patron"],
+                             criterio.get("minimo"), criterio.get("maximo"))
     if regla == "todas":
         return all(aplicar_regla(elemento, subregla, analisis)
                    for subregla in criterio["reglas"])
@@ -658,6 +908,10 @@ def aplicar_regla(elemento, criterio, analisis=None):
     if regla == "secuencia_hijos_configurados":
         return secuencia_hijos_configurados(
             elemento, criterio["padre"], criterio["hijos"])
+    if regla == "secuencia_flex_configurada":
+        return secuencia_flex_configurada(
+            elemento, criterio["padre"], criterio["proporcion"],
+            criterio["hijos"])
     if regla == "widget_configurado":
         return widget_configurado(elemento, criterio["configuracion"])
     if regla == "sin_stateful_widget":
@@ -695,7 +949,11 @@ def aplicar_regla(elemento, criterio, analisis=None):
 
 
 def evaluar(codigo, rubrica):
+    codigo = re.sub(r"^\s*(import|export|part)\s+['\"][^'\"]+['\"][^;]*;[ \t]*$", "",
+                    codigo, flags=re.M)
+    codigo = "import 'package:flutter/material.dart';\n" + codigo
     analisis = analizar_flutter(codigo)
+    analisis["codigo"] = codigo
 
     if not analisis["sintaxis_correcta"]:
         return {

@@ -35,3 +35,34 @@ python3 scripts/preparar_moodle.py mascota_virtual
 Cada carpeta generada contiene los archivos de soporte. La rúbrica específica
 se llama siempre `rubrica.json`. El contenido de `PERSONALIZACION.txt` se copia
 en el campo **Personalización** de CodeRunner y no se sube como archivo.
+
+También están disponibles `callbacks_01_boton`, `callbacks_02_contador`,
+`callbacks_03_personalizar`, `callbacks_04_informacion`,
+`callbacks_05_opcional` y `clasico_dam_daw`.
+
+## Sincronización con DAD
+
+Se han recuperado los archivos de soporte, seis rúbricas y las soluciones de
+la retroalimentación general de las preguntas CodeRunner de UT2 de DAD.
+Las cinco preguntas de callbacks compartían el mismo motor. El clásico
+conservaba una versión anterior cuyo código está incluido en el motor común,
+con las ampliaciones de callbacks añadidas. Ver `docs/sincronizacion-dad.md`.
+
+## Actualizar preguntas existentes
+
+Cada pregunta CodeRunner contiene su propia copia de los archivos de soporte.
+Cambiar este repositorio no modifica las preguntas de Moodle.
+
+- Una rúbrica nueva para una pregunta nueva no obliga a actualizar las antiguas.
+- Una corrección del motor debe desplegarse en las preguntas afectadas que
+  deban recibirla. No es obligatorio migrar todas a la vez.
+- Antes de desplegar, ejecutar todas las pruebas y comprobar la solución de
+  referencia, soluciones alternativas y casos incorrectos de cada actividad
+  afectada. Después, validar también en CodeRunner: los tests locales no
+  comprueban la configuración del sandbox ni los archivos cargados en Moodle.
+- Registrar la versión y las huellas de los archivos desplegados. Conservar
+  una exportación XML anterior para poder restaurar la pregunta.
+
+Los tests requieren un entorno Linux compatible con `src/libdartparser.so`.
+El analizador es estático: comprueba estructura y patrones del código Dart,
+sin ejecutar Flutter ni verificar el resultado visual o funcional completo.

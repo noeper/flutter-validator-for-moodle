@@ -1,0 +1,70 @@
+{
+  "nombre": "Ejercicio 3 · Cada tarjeta, su acción",
+  "criterios": [
+    {
+      "id": "tarjeta_sin_estado",
+      "descripcion": "TarjetaEvento sigue siendo un StatelessWidget",
+      "puntos": 1,
+      "regla": "clase_hereda_de",
+      "clase": "TarjetaEvento",
+      "herencia": "StatelessWidget"
+    },
+    {
+      "id": "tarjeta_igual",
+      "descripcion": "TarjetaEvento no cambia: sigue recibiendo un VoidCallback y no muestra SnackBar",
+      "puntos": 1,
+      "regla": "todas",
+      "reglas": [
+        {
+          "regla": "ambito_contiene",
+          "clase": "TarjetaEvento",
+          "patron": "final\\s+(?:VoidCallback|void\\s+Function\\s*\\(\\s*\\))\\s+onInscribirse\\s*;"
+        },
+        {
+          "regla": "no",
+          "subregla": {
+            "regla": "ambito_contiene",
+            "clase": "TarjetaEvento",
+            "patron": "showSnackBar\\s*\\("
+          }
+        }
+      ]
+    },
+    {
+      "id": "tres_tarjetas",
+      "descripcion": "La pantalla muestra al menos tres TarjetaEvento con su propio callback",
+      "puntos": 1,
+      "regla": "llamadas_con_propiedad",
+      "estado_de": "PantallaEventos",
+      "llamada": "TarjetaEvento",
+      "propiedad": "onInscribirse",
+      "minimo": 3
+    },
+    {
+      "id": "mensajes_distintos",
+      "descripcion": "Cada tarjeta muestra un mensaje diferente (al menos tres distintos)",
+      "puntos": 2,
+      "regla": "textos_distintos_en_propiedad",
+      "estado_de": "PantallaEventos",
+      "llamada": "TarjetaEvento",
+      "propiedad": "onInscribirse",
+      "minimo": 3
+    },
+    {
+      "id": "snackbar_pantalla",
+      "descripcion": "Los mensajes se muestran con un SnackBar desde la pantalla",
+      "puntos": 1,
+      "regla": "ambito_contiene",
+      "estado_de": "PantallaEventos",
+      "patron": "showSnackBar\\s*\\("
+    },
+    {
+      "id": "contador",
+      "descripcion": "La AppBar muestra el contador de inscripciones (una variable de la pantalla) y sube dentro de setState()",
+      "puntos": 1,
+      "regla": "contador_en_llamada",
+      "estado_de": "PantallaEventos",
+      "llamada": "AppBar"
+    }
+  ]
+}
